@@ -17,6 +17,7 @@ class CadastroDoador extends Component {
 	}
 	
     envia(event){
+        
 
 		event.preventDefault();
         const requestInfo = {
