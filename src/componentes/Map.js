@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
+import '../css/main.css';
+import '../css/util.css';
+import '../css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
+import '../css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
+import '../css/vendor/animate/animate.css';
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
-Geocode.setApiKey( "AIzaSyAAAMYujuYOBbjtnT857b-kiKJX-Y0xRdY" );
+Geocode.setApiKey( "AIzaSyD1duH4PjUoS_iVpTJpAZVNorDHbsUmJvI" );
 Geocode.enableDebug();
+
 
 class Map extends Component{
 
@@ -271,15 +277,15 @@ class Map extends Component{
 				</div>
 
 				<AsyncMap
-					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAAMYujuYOBbjtnT857b-kiKJX-Y0xRdY"
+					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1duH4PjUoS_iVpTJpAZVNorDHbsUmJvI&libraries=places"
 					loadingElement={
-						<div style={{ height: `100%` }} />
+						<div style={{ height: '100%' }} />
 					}
 					containerElement={
 						<div style={{ height: this.props.height }} />
 					}
 					mapElement={
-						<div style={{ height: `100%` }} />
+						<div style={{ height: '100%'}} />
 					}
 				/>
 			</div>

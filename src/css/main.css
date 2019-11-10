@@ -44,11 +44,13 @@
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
+
 * {
 	margin: 0px; 
 	padding: 0px; 
 	box-sizing: border-box;
 }
+
 
 body, html {
 	height: 100%;
@@ -107,6 +109,11 @@ textarea {
   border: none;
 }
 
+.map{
+  margin: 5px; 
+	padding: 20px; 
+	box-sizing: border-box;
+}
 textarea:focus, input:focus {
   border-color: transparent !important;
 }

@@ -15,7 +15,9 @@ import Map from './componentes/Map';
 class cadastroColetor extends Component {
     constructor(){
         super()
-        this.state = {msg:''}
+        this.state = {
+            msg:'',
+            city:''}
 	}
 	  //https://easybloodteste.herokuapp.com/swagger-ui.html#/
     envia(event){
@@ -95,20 +97,25 @@ class cadastroColetor extends Component {
                                  <span className="lnr lnr-lock"></span>
                              </span>
                          </div>
-     
+                         <p>{this.state.city}</p>
+                         <div className="map">
+                             <h3>Endereço:</h3>
                          
+                         <div >
+                                <Map
+                                    google={this.props.google}
+                                    center={{lat: 18.5204, lng: 73.8567}}
+                                    height='300px'
+                                    zoom={15}
+                                    cep={this.state.city}
+                                />
+                         </div>      
+                         </div>
+                        
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
-                         <div style={{ margin: '100px' }}>
-                                <Map
-                                    google={this.props.google}
-                                    center={{lat: 0, lng: 0}}
-                                    height='300px'
-                                    zoom={15}
-                                />
-                         </div>
-                        
+
                      </form>
                  </div>
              </div>
