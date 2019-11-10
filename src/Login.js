@@ -26,7 +26,7 @@ class Login extends Component{
 			}
         };
 		
-		axios.post('https://easybloodteste.herokuapp.com/users/login',null,requestInfo)
+		axios.post('https://easybloodteste.herokuapp.com/users',null,requestInfo)
 		.then(response => {
 			console.log(response.data.username);
 			localStorage.setItem('dados', response.data);

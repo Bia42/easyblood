@@ -11,24 +11,11 @@ import Header from './componentes/Header';
 
 
 class CadastroDoador extends Component {
-    constructor(props){
-        super(props)
-        this.state = {msg:'',
-        selectValue: "",
-        selectValueSexo: ""
-        }
-        this.handleDropdownChange = this.handleDropdownChange.bind(this);
-
+    constructor(){
+        super()
+        this.state = {msg:''}
 	}
-
-    
-      handleDropdownChange(e) {
-        this.setState({ selectValue: e.target.value });
-      }
-      handleDropdownChange2(e) {
-        this.setState({ selectValueSexo: e.target.value });
-      }
-      
+	  //https://easybloodteste.herokuapp.com/swagger-ui.html#/
     envia(event){
 
 
@@ -36,18 +23,19 @@ class CadastroDoador extends Component {
         const requestInfo = {
 			headers:{
 				Authorization:'Basic ' + new Buffer('teste' + ':' + '123').toString('base64')
-            }
+            },
+            body:{
+                cpf: '',
+                name:'',
+                username:'',
+                password:'',
+                passwordConfirm: '',
+                
+
+			}
         };
 		
-		axios.post('https://easybloodteste.herokuapp.com/users',   {       
-        cpf: this.cpf.value,
-        name: this.name.value,
-        username: this.username.value,
-        password: this.password.value,
-        passwordConfirm: this.passwordConfirm.value,
-        bloodType: this.state.selectValue,
-        sex: this.state.selectValueSexo
-        },requestInfo)
+		axios.post('https://easybloodteste.herokuapp.com/users/login',null,requestInfo)
 		.then(response => {
 			console.log(response.data.username);
 			localStorage.setItem('dados', response.data);
@@ -55,10 +43,22 @@ class CadastroDoador extends Component {
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
 			console.log(e);
-            });
-            
-    }
+			});
+
+			/*
+        fetch('https://easybloodteste.herokuapp.com/users/login',requestInfo)
+            .then(response => {
+                if(response.ok){
+                    return response.text();
+                } else {
+                    this.setState({msg:'não foi possível fazer o login'})
+                }
     
+            })
+            .then(token => {
+                console.log(token);
+            }) */
+    }
     render(){
         return (
         
@@ -69,48 +69,17 @@ class CadastroDoador extends Component {
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                          <span className="login100-form-title p-b-55">
-                             Cadastro de Doador
+                             Cadastro de Centro Coletor
                          </span>
      
                          <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
+                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.username = input }/>
                              <span className="focus-input100"></span>
                          </div>
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="cpf" placeholder="CPF" ref={(input) => this.cpf = input }/>
-                             <span className="focus-input100"></span>
-                         </div>
-                         
-                         <div>
-                             <p>Escolha seu tipo Sanguinio:</p>
-                         </div>
-                         <div>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
-                                <option value = "A+">A+</option>
-                                <option value = "A-">A-</option>
-                                <option value = "B+">B+</option>
-                                <option value = "B-">B-</option>
-                                <option value = "AB+">AB+</option>
-                                <option value = "AB-">>AB-</option>
-                                <option value = "O-">O-</option>
-                                <option value = "O+">O+</option>
-                            </select>
-                         </div>
-
-                         <div>
-                             <p>Sexo:</p>
-                         </div>
-                         <div>
-                            <select id="dropdownSexo" onChange= {this.handleDropdownChange2}>
-                                <option value = "F">F</option>
-                                <option value = "M">M</option>
-                                <option value = "O">Outros</option>
-                            </select>
-                         </div>
-
-                        <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+                        
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                              <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
@@ -127,7 +96,7 @@ class CadastroDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Confirmar Password" ref={(input) => this.passwordConfirm = input }/>
+                             <input className="input100" type="password" name="pass" placeholder="Confirmar Password" ref={(input) => this.password = input }/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-lock"></span>
@@ -138,7 +107,8 @@ class CadastroDoador extends Component {
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
-     
+    
+                        
                      </form>
                  </div>
              </div>
