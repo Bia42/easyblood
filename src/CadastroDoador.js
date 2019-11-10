@@ -18,6 +18,8 @@ class CadastroDoador extends Component {
         selectValueSexo: ""
         }
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        this.handleDropdownChange2 = this.handleDropdownChange2.bind(this);
+
 
 	}
 
@@ -46,7 +48,8 @@ class CadastroDoador extends Component {
         password: this.password.value,
         passwordConfirm: this.passwordConfirm.value,
         bloodType: this.state.selectValue,
-        sex: this.state.selectValueSexo
+        sex: this.state.selectValueSexo,
+        bithDate: this.bithDate.value
         },requestInfo)
 		.then(response => {
 			console.log(response.data.username);
@@ -109,7 +112,12 @@ class CadastroDoador extends Component {
                                 <option value = "O">Outros</option>
                             </select>
                          </div>
-
+                         <div>
+                             <p>Data de Nascimento:</p>
+                         </div>
+                        <div>
+                         <input type="date" ref={(input) => this.bithDate = input }/>
+                        </div>
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                              <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
                              <span className="focus-input100"></span>
@@ -138,7 +146,6 @@ class CadastroDoador extends Component {
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
-     
                      </form>
                  </div>
              </div>

@@ -7,10 +7,12 @@ import './css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
 import './css/vendor/animate/animate.css';
 import axios from 'axios';
 import Header from './componentes/Header';
+import Map from './componentes/Map';
 
 
 
-class CadastroDoador extends Component {
+
+class cadastroColetor extends Component {
     constructor(){
         super()
         this.state = {msg:''}
@@ -23,16 +25,7 @@ class CadastroDoador extends Component {
         const requestInfo = {
 			headers:{
 				Authorization:'Basic ' + new Buffer('teste' + ':' + '123').toString('base64')
-            },
-            body:{
-                cpf: '',
-                name:'',
-                username:'',
-                password:'',
-                passwordConfirm: '',
-                
-
-			}
+            }
         };
 		
 		axios.post('https://easybloodteste.herokuapp.com/users/login',null,requestInfo)
@@ -107,7 +100,14 @@ class CadastroDoador extends Component {
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
-    
+                         <div style={{ margin: '100px' }}>
+                                <Map
+                                    google={this.props.google}
+                                    center={{lat: 0, lng: 0}}
+                                    height='300px'
+                                    zoom={15}
+                                />
+                         </div>
                         
                      </form>
                  </div>
@@ -118,4 +118,4 @@ class CadastroDoador extends Component {
        }
 }
 
-export default CadastroDoador;
+export default cadastroColetor;

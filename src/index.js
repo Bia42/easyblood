@@ -7,6 +7,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
 import Login from './Login';
 import CadastroDoador from './CadastroDoador';
+import CadastroColetor from './CadastroColetor';
+
 
 ReactDOM.render(
 (<BrowserRouter>  
@@ -14,6 +16,8 @@ ReactDOM.render(
         <Route exact path="/" component={App}/>
         <Route path="/login" component={Login}/>
         <Route path="/cadastroDoador" component={CadastroDoador}/>
+        <Route path="/cadastroColetor" component={CadastroColetor}/>
+
     </Switch>
 </BrowserRouter>)
     , 
