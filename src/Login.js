@@ -6,6 +6,7 @@ import './css/util.css';
 import './css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
 import './css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
 import './css/vendor/animate/animate.css';
+import * as utils from './utils/utils';
 
 import axios from 'axios';
 import Header from './componentes/Header';
@@ -26,29 +27,14 @@ class Login extends Component{
 			}
         };
 		
-		axios.post('https://easybloodteste.herokuapp.com/users',null,requestInfo)
+		axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
 		.then(response => {
-			console.log(response.data.username);
-			localStorage.setItem('dados', response.data);
-			this.props.history.push("/")
+			console.log(response);
+			localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
-			console.log(e);
+				console.log(e);
 			});
-
-			/*
-        fetch('https://easybloodteste.herokuapp.com/users/login',requestInfo)
-            .then(response => {
-                if(response.ok){
-                    return response.text();
-                } else {
-                    this.setState({msg:'não foi possível fazer o login'})
-                }
-    
-            })
-            .then(token => {
-                console.log(token);
-            }) */
     }
 
 

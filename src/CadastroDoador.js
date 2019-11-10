@@ -7,6 +7,7 @@ import './css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
 import './css/vendor/animate/animate.css';
 import axios from 'axios';
 import Header from './componentes/Header';
+import * as utils from "./utils/utils";
 
 
 
@@ -33,13 +34,12 @@ class CadastroDoador extends Component {
 
 
 		event.preventDefault();
-        const requestInfo = {
-			headers:{
-				Authorization:'Basic ' + new Buffer('teste' + ':' + '123').toString('base64')
-            }
-        };
+        const requestInfo = utils.novoRequestInfo("");
+        if(requestInfo == null)
+            window.location = "/login";
+        //TODO: TESTAR ISSO AQUI
 		
-		axios.post('https://easybloodteste.herokuapp.com/users',   {       
+		axios.post(utils.URL_BASE + '/users',   {
         cpf: this.cpf.value,
         name: this.name.value,
         username: this.username.value,
