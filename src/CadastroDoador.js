@@ -41,7 +41,7 @@ class CadastroDoador extends Component {
             window.location = "/login";
         //TODO: TESTAR ISSO AQUI
 		
-		axios.post(utils.URL_BASE + '/users',   {
+		axios.post(utils.URL_BASE + '/public/users',   {
         cpf: this.cpf.value,
         name: this.name.value,
         username: this.username.value,
@@ -52,7 +52,7 @@ class CadastroDoador extends Component {
         bithDate: this.bithDate.value
         },requestInfo)
 		.then(response => {
-			console.log(response.data.username);
+			console.log(response);
 			localStorage.setItem('dados', response.data);
 			this.props.history.push("/")
 			}).catch(e=> {

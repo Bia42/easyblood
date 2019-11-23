@@ -30,6 +30,8 @@ class Map extends Component{
 			}
 		}
 	}
+
+	
 	/**
 	 * Get the current address from the default map position and set those values in the state
 	 */
@@ -43,7 +45,6 @@ class Map extends Component{
 				      state = this.getState( addressArray );
 
 				console.log( 'city', city, area, state );
-
 				this.setState( {
 					address: ( address ) ? address : '',
 					area: ( area ) ? area : '',
@@ -63,6 +64,7 @@ class Map extends Component{
 	 * @param nextState
 	 * @return {boolean}
 	 */
+	
 	shouldComponentUpdate( nextProps, nextState ){
 		if (
 			this.state.markerPosition.lat !== this.props.center.lat ||
@@ -133,6 +135,7 @@ class Map extends Component{
 	 */
 	onChange = ( event ) => {
 		this.setState({ [event.target.name]: event.target.value });
+		this.props.escutadorDeInput(event);
 	};
 	/**
 	 * This Event triggers when the marker window is closed
@@ -175,11 +178,15 @@ class Map extends Component{
 						lng: newLng
 					},
 				} )
+	
 			},
 			error => {
 				console.error(error);
 			}
 		);
+		console.log( 'chamando escutador');
+
+		this.props.escutadorDeInput(this.state);
 	};
 
 	/**
@@ -210,10 +217,17 @@ class Map extends Component{
 				lng: lngValue
 			},
 		})
+		console.log( 'chamando escutador');
+
+		this.props.escutadorDeInput(this.state);
+
 	};
 
 
+
 	render(){
+		this.props.escutadorDeInput(this.state);
+
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (

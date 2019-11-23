@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import * as utils from './utils/utils';
+
 import './css/main.css';
 import './css/util.css';
 import './css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -13,24 +15,53 @@ import Map from './componentes/Map';
 
 
 class cadastroColetor extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             msg:'',
-            city:''}
+            name: '',
+            city:'',
+            area: '',
+            state: '',
+            address: '',
+            lat: '',
+            lng: ''
+        }
 	}
-	  //https://easybloodteste.herokuapp.com/swagger-ui.html#/
+      //https://easybloodteste.herokuapp.com/swagger-ui.html#/
+    escutadorDeInput = event => {
+        console.log(event);
+        console.log(event.markerPosition.lng);
+
+        this.setState({
+            city: event.city,
+            area: event.area,
+            state: event.state,
+            address: event.address,
+            lat:event.markerPosition.lat,
+            lng:event.markerPosition.lng
+
+        });
+    }
+    
     envia(event){
 
 
 		event.preventDefault();
-        const requestInfo = {
-			headers:{
-				Authorization:'Basic ' + new Buffer('teste' + ':' + '123').toString('base64')
-            }
-        };
+        const requestInfo = utils.novoRequestInfo("");
+        if(requestInfo == null)
+            window.location = "/login";
+        //TODO: TESTAR ISSO AQUI
 		
-		axios.post('https://easybloodteste.herokuapp.com/users/login',null,requestInfo)
+		axios.post(utils.URL_BASE + '/bloodCenters',   {
+        name:this.name.value,
+        address:{
+            longitude: this.state.lng,
+            latitude: this.state.lat
+
+        },
+        imageURL:this.urlImagem.value
+        },requestInfo)
 		.then(response => {
 			console.log(response.data.username);
 			localStorage.setItem('dados', response.data);
@@ -38,21 +69,8 @@ class cadastroColetor extends Component {
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
 			console.log(e);
-			});
-
-			/*
-        fetch('https://easybloodteste.herokuapp.com/users/login',requestInfo)
-            .then(response => {
-                if(response.ok){
-                    return response.text();
-                } else {
-                    this.setState({msg:'não foi possível fazer o login'})
-                }
-    
-            })
-            .then(token => {
-                console.log(token);
-            }) */
+            });
+            
     }
     render(){
         return (
@@ -70,48 +88,31 @@ class cadastroColetor extends Component {
                          <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.username = input }/>
+                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
+                             <span className="focus-input100"></span>
+                         </div>
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                             <input className="input100" type="text" name="urlImagem" placeholder="URL da Imagem" ref={(input) => this.urlImagem = input }/>
                              <span className="focus-input100"></span>
                          </div>
                         
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-                             <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
-                             <span className="focus-input100"></span>
-                             <span className="symbol-input100">
-                                 <span className="lnr lnr-envelope"></span>
-                             </span>
-                         </div>
-     
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input }/>
-                             <span className="focus-input100"></span>
-                             <span className="symbol-input100">
-                                 <span className="lnr lnr-lock"></span>
-                             </span>
-                         </div>
 
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Confirmar Password" ref={(input) => this.password = input }/>
-                             <span className="focus-input100"></span>
-                             <span className="symbol-input100">
-                                 <span className="lnr lnr-lock"></span>
-                             </span>
-                         </div>
-                         <p>{this.state.city}</p>
                          <div className="map">
                              <h3>Endereço:</h3>
                          
-                         <div >
+                         
                                 <Map
                                     google={this.props.google}
-                                    center={{lat: 18.5204, lng: 73.8567}}
-                                    height='300px'
+                                    center={{lat: -22.8336113, lng: -47.0497247}}
+                                    height='500px'
                                     zoom={15}
-                                    cep={this.state.city}
+                                    escutadorDeInput={this.escutadorDeInput}
                                 />
-                         </div>      
-                         </div>
                         
+                        
+           
+
+                         </div>
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
