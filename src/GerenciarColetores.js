@@ -11,10 +11,7 @@ import axios from 'axios';
 import Header from './componentes/Header';
 import Map from './componentes/Map';
 
-
-
-
-class cadastroColetor extends Component {
+class GerenciarColetores extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -25,12 +22,27 @@ class cadastroColetor extends Component {
             state: '',
             address: '',
             lat: '',
-            lng: ''
-        }
-        if(utils.novoRequestInfo("") == null)
+            lng: '',
+            centrosColetores: []
+        };
+        var requestInfo = utils.novoRequestInfo("");
+        if(requestInfo == null)
             window.location = "/login";
+
+        axios.get(utils.URL_BASE + '/bloodCenters', utils.novoRequestInfo(""))
+            .then(response => {
+                this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
+            });
 	}
-      //https://easybloodteste.herokuapp.com/swagger-ui.html#/
+    
+    envia1(event){
+		event.preventDefault();
+        const requestInfo = utils.novoRequestInfo("");
+        if(requestInfo == null)
+            window.location = "/login";
+    }
+
+    //https://easybloodteste.herokuapp.com/swagger-ui.html#/
     escutadorDeInput = event => {
         // console.log(event);
         // console.log(event.markerPosition.lng);
@@ -45,9 +57,9 @@ class cadastroColetor extends Component {
 
         });
     }
-    
+
     envia(event){
-		event.preventDefault();
+        event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
             window.location = "/login";
@@ -77,20 +89,21 @@ class cadastroColetor extends Component {
             });
 
     }
+
     render(){
         return (
-        
          <div> 
          <Header/>
          <div className="limiter">
              <div className="container-login100">
 
-                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                 {/*COLUNA DO CADASTRO*/}
+                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30 margem-direita">
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                          <span className="login100-form-title p-b-55">
-                             Cadastro de Centro Coletor
+                             Cadastrar um Centro Coletor
                          </span>
-     
+
                          <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
@@ -101,19 +114,18 @@ class cadastroColetor extends Component {
                              <input className="input100" type="text" name="urlImagem" placeholder="URL da Imagem" ref={(input) => this.urlImagem = input }/>
                              <span className="focus-input100"></span>
                          </div>
-                        
+
 
                          <div className="map">
                              <h3>Endereço:</h3>
-                         
-                         
-                                <Map
-                                    google={this.props.google}
-                                    center={{lat: -22.8336113, lng: -47.0497247}}
-                                    height='500px'
-                                    zoom={15}
-                                    escutadorDeInput={this.escutadorDeInput}
-                                />
+
+                             <Map
+                                 google={this.props.google}
+                                 center={{lat: -22.8336113, lng: -47.0497247}}
+                                 height='500px'
+                                 zoom={15}
+                                 escutadorDeInput={this.escutadorDeInput}
+                             />
 
                          </div>
                          <div className="container-login100-form-btn p-t-25">
@@ -122,12 +134,26 @@ class cadastroColetor extends Component {
 
                      </form>
                  </div>
+                 {/*FIM DA COLUNA DO CADASTRO*/}
+
+                 {/*COLUNA DO GERENCIAMENTO*/}
+                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+
+                     <span className="login100-form-title p-b-55">
+                         Selecione um de seus centros coletores
+                     </span>
+
+                     {this.state.centrosColetores.map((centro, i) => <div key={i}>{centro.name}</div>)}
+
+                 </div>
+                 {/*FIM DA COLUNA DO GERENCIAMENTO*/}
 
              </div>
+
          </div>
          </div>  
         );
        }
 }
 
-export default cadastroColetor;
+export default GerenciarColetores;

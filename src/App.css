@@ -2,6 +2,10 @@ html {
   scroll-behavior: smooth;
 }
 
+.margem-direita {
+  margin-right: 10px;
+}
+
 .App {
   text-align: center;
 }
