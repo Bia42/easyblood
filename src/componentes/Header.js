@@ -14,7 +14,7 @@ export default class Header extends Component{
               <div className="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
                   <a className="header-logo pure-menu-heading" href="">Easy Blood</a>
                   <ul className="pure-menu-list">
-                      <li className="pure-menu-item pure-menu-selected"><Link to="/home" className="pure-menu-link">Home</Link></li>
+                      <li className="pure-menu-item pure-menu-selected"><Link to="/" className="pure-menu-link">Home</Link></li>
                       <li className="pure-menu-item"><Link to="/cadastroDoador" className="pure-menu-link">Cadastro de doador</Link></li>
                       <li className="pure-menu-item"><Link to="/cadastroColetor" className="pure-menu-link">Cadastro de coletor</Link></li>
                       <li className="pure-menu-item"><Link to="/ajuda" className="pure-menu-link">Ajuda</Link></li>

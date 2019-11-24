@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .App {
   text-align: center;
 }
@@ -33,4 +37,10 @@
   opacity: 1;
   color: red;
   font-size: large;
+}
+
+.buscar {
+  margin: auto;
+  display: block;
+  background: #fd6b6c !important;
 }

@@ -259,7 +259,7 @@ class Map extends Component{
 								height: '40px',
 								paddingLeft: '16px',
 								marginTop: '2px',
-								marginBottom: '500px'
+								marginBottom: '100px'
 							}}
 							onPlaceSelected={ this.onPlaceSelected }
 							types={['(regions)']}
@@ -270,25 +270,26 @@ class Map extends Component{
 		);
 		let map;
 		if( this.props.center.lat !== undefined ) {
-			map = <div>
-				<div>
-					<div className="form-group">
-						<label htmlFor="">City</label>
-						<input type="text" name="city" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.city }/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="">Area</label>
-						<input type="text" name="area" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.area }/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="">State</label>
-						<input type="text" name="state" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.state }/>
-					</div>
-					<div className="form-group">
-						<label htmlFor="">Address</label>
-						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
-					</div>
-				</div>
+			map =
+			<div>
+				{/*<div>*/}
+				{/*	<div className="form-group">*/}
+				{/*		<label htmlFor="">Cidade</label>*/}
+				{/*		<input type="text" name="city" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.city }/>*/}
+				{/*	</div>*/}
+				{/*	<div className="form-group">*/}
+				{/*		<label htmlFor="">Area</label>*/}
+				{/*		<input type="text" name="area" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.area }/>*/}
+				{/*	</div>*/}
+				{/*	<div className="form-group">*/}
+				{/*		<label htmlFor="">Estado</label>*/}
+				{/*		<input type="text" name="state" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.state }/>*/}
+				{/*	</div>*/}
+				{/*	<div className="form-group">*/}
+				{/*		<label htmlFor="">Endereço</label>*/}
+				{/*		<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>*/}
+				{/*	</div>*/}
+				{/*</div>*/}
 
 				<AsyncMap
 					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1duH4PjUoS_iVpTJpAZVNorDHbsUmJvI&libraries=places"
