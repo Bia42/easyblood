@@ -459,13 +459,19 @@ iframe {
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
+
+  text-decoration: none;
 }
 
+.mensagem-erro {
+  color: red;
+}
 
 .btn-face {
   color: #3b5998;
 }
 
+.btn-google i,
 .btn-face i {
   font-size: 20px;
   margin-right: 10px;

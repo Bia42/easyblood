@@ -16,7 +16,7 @@ class App extends Component{
         <div className="splash-container">
             <div className="splash">
                 <h1 className="splash-head">
-                <img src="../logo.png" alt=""></img>
+                <img src="../logo.png"></img>
                 <p className="splash-subhead">
                     Existe um centro coletor precisando de você!
                 </p>
@@ -52,8 +52,8 @@ class App extends Component{
   }
 
     escutadorDeInput = event => {
-        console.log(event);
-        console.log(event.markerPosition.lng);
+        // console.log(event);
+        // console.log(event.markerPosition.lng);
 
         this.setState({
             city: event.city,

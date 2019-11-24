@@ -29,12 +29,18 @@ class Login extends Component{
 		
 		axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
 		.then(response => {
-			console.log(response);
+			// console.log("response:");
+			// console.log(response);
 			localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 			window.location = "/";
-			}).catch(e=> {
-				this.setState({msg:'não foi possível fazer o login'});
-				console.log(e);
+			})
+			.catch(e=> {
+				// console.log("e.resp:");
+				// console.log(e.response.status);
+				if(e.response.status === 401)
+					this.setState({msg:'Usuario e/ou senha incorretos'});
+				else
+					this.setState({msg:'não foi possível fazer o login'});
 			});
     }
 
@@ -52,7 +58,7 @@ class Login extends Component{
 						Login
 					</span>
 
-					<span>{this.state.msg}</span>
+					<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
 					<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
 						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
@@ -70,12 +76,12 @@ class Login extends Component{
 						</span>
 					</div>
 
-					<div className="contact100-form-checkbox m-l-4">
-						<input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>
-						<label className="label-checkbox100" htmlFor = "ckb1">
-							Remember me
-						</label>
-					</div>
+					{/*<div className="contact100-form-checkbox m-l-4">*/}
+					{/*	<input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>*/}
+					{/*	<label className="label-checkbox100" htmlFor = "ckb1">*/}
+					{/*		Remember me*/}
+					{/*	</label>*/}
+					{/*</div>*/}
 					
 					<div className="container-login100-form-btn p-t-25">
 						<input type="submit" className="login100-form-btn"  value = "Login"/>
@@ -93,17 +99,18 @@ class Login extends Component{
 					</a>
 
 					<a href="#" className="btn-google m-b-10">
-						<img src="./imgs/icons/icon-google.png"/>
+						<i className="fa fa-google-plus"></i>
 						Google
 					</a>
 
-					<div className="text-center w-full p-t-115">
+					<div className="text-center w-full p-t-15">
 						<span className="txt1">
-							Not a member?
+							Não está cadastrado?
 						</span>
-
+					</div>
+					<div className="container-login100-form-btn p-t-25">
 						<a className="txt1 hov1" href="/cadastroDoador">
-							Sign up now							
+							Cadastre-se agora!
 						</a>
 					</div>
 				</form>

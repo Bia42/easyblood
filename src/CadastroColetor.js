@@ -27,11 +27,13 @@ class cadastroColetor extends Component {
             lat: '',
             lng: ''
         }
+        if(utils.novoRequestInfo("") == null)
+            window.location = "/login";
 	}
       //https://easybloodteste.herokuapp.com/swagger-ui.html#/
     escutadorDeInput = event => {
-        console.log(event);
-        console.log(event.markerPosition.lng);
+        // console.log(event);
+        // console.log(event.markerPosition.lng);
 
         // this.setState({
         //     city: event.city,
@@ -50,25 +52,30 @@ class cadastroColetor extends Component {
         if(requestInfo == null)
             window.location = "/login";
         //TODO: TESTAR ISSO AQUI
-		
-		axios.post(utils.URL_BASE + '/bloodCenters',   {
-        name:this.name.value,
-        address:{
-            longitude: this.state.lng,
-            latitude: this.state.lat
 
-        },
-        imageURL:this.urlImagem.value
-        },requestInfo)
-		.then(response => {
-			console.log(response.data.username);
-			localStorage.setItem('dados', response.data);
-			this.props.history.push("/")
-			}).catch(e=> {
-				this.setState({msg:'não foi possível fazer o login'});
-			console.log(e);
+        axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
+            .then(response => {
+                axios.post(utils.URL_BASE + '/bloodCenters',
+                    {
+                        name:this.name.value,
+                        address:{
+                            longitude: this.state.lng,
+                            latitude: this.state.lat
+                        },
+                        imageURL:this.urlImagem.value,
+                        user: response.data
+                    }, requestInfo)
+                    .then(response => {
+                        // console.log(response.data.username);
+                        localStorage.setItem('dados', response.data);
+                        this.props.history.push("/")
+                    }).catch(e=> {
+                    this.setState({msg:'não foi possível cadastrar o centro coletor'});
+                    // console.log(e);
+                });
+
             });
-            
+
     }
     render(){
         return (
