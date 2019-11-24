@@ -12,3 +12,8 @@ export function novoRequestInfo(body) {
         body: body
     };
 }
+
+export function logout() {
+    localStorage.removeItem("Authorization");
+}
+

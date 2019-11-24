@@ -31,6 +31,7 @@ class Login extends Component{
 		.then(response => {
 			console.log(response);
 			localStorage.setItem('Authorization', requestInfo.headers.Authorization);
+			window.location = "/";
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
 				console.log(e);

@@ -33,20 +33,18 @@ class cadastroColetor extends Component {
         console.log(event);
         console.log(event.markerPosition.lng);
 
-        this.setState({
-            city: event.city,
-            area: event.area,
-            state: event.state,
-            address: event.address,
-            lat:event.markerPosition.lat,
-            lng:event.markerPosition.lng
-
-        });
+        // this.setState({
+        //     city: event.city,
+        //     area: event.area,
+        //     state: event.state,
+        //     address: event.address,
+        //     lat:event.markerPosition.lat,
+        //     lng:event.markerPosition.lng
+        //
+        // });
     }
     
     envia(event){
-
-
 		event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -108,9 +106,6 @@ class cadastroColetor extends Component {
                                     zoom={15}
                                     escutadorDeInput={this.escutadorDeInput}
                                 />
-                        
-                        
-           
 
                          </div>
                          <div className="container-login100-form-btn p-t-25">

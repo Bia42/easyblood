@@ -16,7 +16,7 @@ class App extends Component{
         <div className="splash-container">
             <div className="splash">
                 <h1 className="splash-head">
-                <img src="../logo.png"></img>
+                <img src="../logo.png" alt=""></img>
                 <p className="splash-subhead">
                     Existe um centro coletor precisando de você!
                 </p>
@@ -35,9 +35,9 @@ class App extends Component{
 
                 <Map
                     google={this.props.google}
-                    center={{lat: -22.8336113, lng: -47.0497247}}
+                    center={{lat: -22.904762, lng: -47.061180}}
                     height='600px'
-                    zoom={15}
+                    zoom={12.1}
                     escutadorDeInput={this.escutadorDeInput}
                 />
             </div>
