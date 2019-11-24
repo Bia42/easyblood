@@ -86,10 +86,8 @@ class CadastroDoador extends Component {
                              <span className="focus-input100"></span>
                          </div>
                          
-                         <div>
-                             <p>Escolha seu tipo Sanguinio:</p>
-                         </div>
-                         <div>
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Escolha seu tipo Sanguinio:</p>
                             <select id="dropdown" onChange= {this.handleDropdownChange}>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
@@ -102,21 +100,18 @@ class CadastroDoador extends Component {
                             </select>
                          </div>
 
-                         <div>
-                             <p>Sexo:</p>
-                         </div>
-                         <div>
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Sexo:</p>
                             <select id="dropdownSexo" onChange= {this.handleDropdownChange2}>
                                 <option value = "F">F</option>
                                 <option value = "M">M</option>
                                 <option value = "O">Outros</option>
                             </select>
-                         </div>
-                         <div>
-                             <p>Data de Nascimento:</p>
-                         </div>
-                        <div>
-                         <input type="date" ref={(input) => this.bithDate = input }/>
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16">
+                            <p>Data de Nascimento:</p>
+                                <input type="date" ref={(input) => this.bithDate = input }/>
                         </div>
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                              <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
