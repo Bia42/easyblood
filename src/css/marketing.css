@@ -12,8 +12,6 @@ body {
 }
 
 .header-logo {
-    background: url(../imgs/logo.png) no-repeat left;
-    height: 1em;
     padding-left: 1.5em;
     padding-bottom: .2em;
     filter: hue-rotate(80deg);
@@ -103,6 +101,7 @@ a.pure-button-primary {
     padding: 0.5em;
     text-align: center;
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+    height: 53px;
 }
 .home-menu {
     background: #f44336;
@@ -117,7 +116,6 @@ a.pure-button-primary {
 .home-menu .pure-menu-heading {
     color: white;
     font-weight: 400;
-    font-size: 120%;
 }
 
 .home-menu .pure-menu-selected a {

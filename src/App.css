@@ -20,3 +20,17 @@
 .App-link {
   color: #09d3ac;
 }
+
+.splash-container{
+  background-image: url("./imgs/background.jpg");
+}
+
+.splash-head {
+  background-color: #ffffffed;
+}
+
+.splash-subhead {
+  opacity: 1;
+  color: red;
+  font-size: large;
+}
