@@ -23,7 +23,8 @@ class CadastroRequisitos extends Component {
             address: '',
             lat: '',
             lng: '',
-            centrosColetores: []
+            centrosColetores: [],
+            bloodCenterSelecionado: {}
         };
         var requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -33,13 +34,14 @@ class CadastroRequisitos extends Component {
             .then(response => {
                 this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
             });
-	}
-    
-    envia1(event){
-		event.preventDefault();
-        const requestInfo = utils.novoRequestInfo("");
-        if(requestInfo == null)
-            window.location = "/login";
+
+        this.handleDropdownChangeSelecionado = this.handleDropdownChangeSelecionado.bind(this);
+    }
+
+    handleDropdownChangeSelecionado(e) {
+        var centroSelecionado = this.state.centrosColetores.find(x => x.name === e.target.value);
+        centroSelecionado.requirements = this.requisitos;
+        this.setState({ bloodCenterSelecionado: centroSelecionado});
     }
 
     //https://easybloodteste.herokuapp.com/swagger-ui.html#/
@@ -63,31 +65,11 @@ class CadastroRequisitos extends Component {
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
             window.location = "/login";
-        //TODO: TESTAR ISSO AQUI
 
-        axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
+        axios.patch(this.state.bloodCenterSelecionado._links.self.href, this.state.bloodCenterSelecionado, requestInfo)
             .then(response => {
-                axios.post(utils.URL_BASE + '/bloodCenters',
-                    {
-                        name:this.name.value,
-                        address:{
-                            longitude: this.state.lng,
-                            latitude: this.state.lat
-                        },
-                        imageURL:this.urlImagem.value,
-                        user: response.data
-                    }, requestInfo)
-                    .then(response => {
-                        // console.log(response.data.username);
-                        localStorage.setItem('dados', response.data);
-                        this.props.history.push("/")
-                    }).catch(e=> {
-                    this.setState({msg:'não foi possível cadastrar o centro coletor'});
-                    // console.log(e);
-                });
-
+                console.log("deu certo");
             });
-
     }
 
     render(){
@@ -96,33 +78,32 @@ class CadastroRequisitos extends Component {
          <Header/>
          <div className="limiter">
              <div className="container-login100">
-
+                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                  {/*COLUNA DO GERENCIAMENTO*/}
                    <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-                       
-                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
-                     <span className="login100-form-title p-b-55">
-                         Cadastro de Requisitos
-                     </span>
-                     <p>Lista de hemocentros:</p>
-                     <select>  
-                         {
-                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
-                         }
-                    </select>
+                         <span className="login100-form-title p-b-55">
+                             Cadastro de Requisitos
+                         </span>
+                         <p>Lista de hemocentros:</p>
+                         <select onChange= {this.handleDropdownChangeSelecionado}>
+                             {
+                                 this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                             }
+                        </select>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos" ref={(input) => this.requisitos = input }/>
+                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos" onChange={(input) => this.requisitos = input.target.value }/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                         </div>
+                   </form>
                  </div>
 
                  {/*FIM DA COLUNA DO GERENCIAMENTO*/}
-                </form>
+
              </div>
 
          </div>
