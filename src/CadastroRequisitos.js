@@ -129,6 +129,7 @@ class CadastroRequisitos extends Component {
          </div>  
         );
        }
+       /**/
 }
 
 export default CadastroRequisitos;
