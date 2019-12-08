@@ -40,6 +40,8 @@ class GerenciarColetores extends Component {
         this.handleDropdownChangeSangueSelecionado = this.handleDropdownChangeSangueSelecionado.bind(this);
     }
 
+ 
+
     handleDropdownChangeBloodCenterSelecionado(e) {
         var centros = this.state.centrosColetores;
         this.setState({ selectedAtualizarSangue: centros.find(x => x.name === e.target.value)});
@@ -62,6 +64,7 @@ class GerenciarColetores extends Component {
         // console.log(event.markerPosition.lng);
 
         this.setState({
+            msg:'',
             city: event.city,
             area: event.area,
             state: event.state,
@@ -129,9 +132,14 @@ class GerenciarColetores extends Component {
         axios.patch(urlUpdate.href, bloodCenterSelecionado, requestInfo)
             .then(response => {
                 console.log("deu certo")
+                this.setState({msg:'Nível de Sangue Atualizado'});
+                this.nivel.value = "";
+                alert('Nível de Sangue Atualizado');
             });
     }
     render(){
+
+        
         return (
          <div> 
          <Header/>
@@ -145,7 +153,6 @@ class GerenciarColetores extends Component {
                              Cadastrar um Centro Coletor
                          </span>
 
-                         <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                              <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
@@ -184,6 +191,9 @@ class GerenciarColetores extends Component {
                          <span className="login100-form-title p-b-55">
                              Selecione um de seus centros coletores
                          </span>
+                         
+                         <span>{this.state.msg}</span>
+
                          <p>Lista de hemocentros:</p>
                          <select onChange= {this.handleDropdownChangeBloodCenterSelecionado}>
                          {
@@ -206,7 +216,7 @@ class GerenciarColetores extends Component {
                          <p>Nível de sangue atual em litros:</p>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nivel" placeholder="Nivel" ref={(input) => this.nivel = input }/>
+                             <input className="input100" type="number"  min="1" max="2000" name="nivel" placeholder="Nivel" ref={(input) => this.nivel = input }/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="container-login100-form-btn p-t-25">
