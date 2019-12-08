@@ -11,7 +11,7 @@ import axios from 'axios';
 import Header from './componentes/Header';
 import Map from './componentes/Map';
 
-class GerenciarColetores extends Component {
+class ComunicacaoHemocentro extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -97,60 +97,26 @@ class GerenciarColetores extends Component {
          <div className="limiter">
              <div className="container-login100">
 
-                 {/*COLUNA DO CADASTRO*/}
-                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30 margem-direita">
-                     <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-                         <span className="login100-form-title p-b-55">
-                             Cadastrar um Centro Coletor
-                         </span>
-
-                         <span>{this.state.msg}</span>
-
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
-                             <span className="focus-input100"></span>
-                         </div>
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="urlImagem" placeholder="URL da Imagem" ref={(input) => this.urlImagem = input }/>
-                             <span className="focus-input100"></span>
-                         </div>
-
-
-                         <div className="map">
-                             <h3>Endereço:</h3>
-
-                             <Map
-                                 google={this.props.google}
-                                 center={{lat: -22.8336113, lng: -47.0497247}}
-                                 height='500px'
-                                 zoom={15}
-                                 escutadorDeInput={this.escutadorDeInput}
-                             />
-
-                         </div>
-                         <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
-                         </div>
-
-                     </form>
-                 </div>
-                 {/*FIM DA COLUNA DO CADASTRO*/}
-
                  {/*COLUNA DO GERENCIAMENTO*/}
                    <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
                      <span className="login100-form-title p-b-55">
-                         Selecione um de seus centros coletores
+                         Solicitação de sangue
                      </span>
-                     <p>Lista de hemocentros:</p>
-                     <select>
-                        
-                     {
-                         
-                         this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                     <p>Lista de hemocentros (necessidade):</p>
+                     <select>  
+                         {
+                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                          }
-                         </select>
+                    </select>
+
+                     <p>Lista de hemocentros para requisição:</p>
+                     <select>  
+                         {
+                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                         }
+                    </select>
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Escolha o tipo Sanguinio:</p>
                             <select id="dropdown" onChange= {this.handleDropdownChange}>
@@ -164,14 +130,14 @@ class GerenciarColetores extends Component {
                                 <option value = "O+">O+</option>
                             </select>
                          </div>
-                         <p>Qual nível de sangue (L):</p>
+                         <p>Quantidade (L):</p>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nivel" placeholder="Nivel" ref={(input) => this.nivel = input }/>
+                             <input className="input100" type="text" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Atualizar"/>
+                             <input type="submit" className="login100-form-btn"  value = "Enviar"/>
                         </div>
                  </div>
 
@@ -185,4 +151,4 @@ class GerenciarColetores extends Component {
        }
 }
 
-export default GerenciarColetores;
+export default ComunicacaoHemocentro;

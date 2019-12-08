@@ -9,6 +9,10 @@ import Login from './Login';
 import CadastroDoador from './CadastroDoador';
 import CadastroColetor from './CadastroColetor';
 import GerenciarColetores from './GerenciarColetores';
+import AlterarDadosDoador from './AlterarDadosDoador';
+import ComunicacaoHemocentro from './ComunicacaoHemocentro';
+
+
 
 
 ReactDOM.render(
@@ -19,6 +23,11 @@ ReactDOM.render(
         <Route path="/cadastroDoador" component={CadastroDoador}/>
         <Route path="/cadastroColetor" component={CadastroColetor}/>
         <Route path="/gerenciarColetores" component={GerenciarColetores}/>
+        <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
+        <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
+
+        
+
 
     </Switch>
 </BrowserRouter>)
