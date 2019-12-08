@@ -23,7 +23,9 @@ class GerenciarColetores extends Component {
             address: '',
             lat: '',
             lng: '',
-            centrosColetores: []
+            centrosColetores: [],
+            selectedAtualizarSangue: {},
+            sangueSelecionado: ""
         };
         var requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -33,8 +35,20 @@ class GerenciarColetores extends Component {
             .then(response => {
                 this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
             });
-	}
-    
+
+        this.handleDropdownChangeBloodCenterSelecionado = this.handleDropdownChangeBloodCenterSelecionado.bind(this);
+        this.handleDropdownChangeSangueSelecionado = this.handleDropdownChangeSangueSelecionado.bind(this);
+    }
+
+    handleDropdownChangeBloodCenterSelecionado(e) {
+        var centros = this.state.centrosColetores;
+        this.setState({ selectedAtualizarSangue: centros.find(x => x.name === e.target.value)});
+    }
+
+    handleDropdownChangeSangueSelecionado(e) {
+        this.setState({ sangueSelecionado: e.target.value});
+    }
+
     envia1(event){
 		event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
@@ -58,12 +72,11 @@ class GerenciarColetores extends Component {
         });
     }
 
-    envia(event){
+    enviaCadastro(event){
         event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
             window.location = "/login";
-        //TODO: TESTAR ISSO AQUI
 
         axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
             .then(response => {
@@ -87,9 +100,37 @@ class GerenciarColetores extends Component {
                 });
 
             });
-
     }
 
+    enviaAtualizaSangue(event) {
+        event.preventDefault();
+
+        let bloodCenterSelecionado = this.state.selectedAtualizarSangue;
+
+        var urlUpdate = bloodCenterSelecionado._links.self;
+
+        var nivel = this.nivel.value;
+        var sangueSelecionado = this.state.sangueSelecionado;
+
+        if(bloodCenterSelecionado.bloodList.length < 1)
+            bloodCenterSelecionado.bloodList = [];
+
+        var tipoSangue = bloodCenterSelecionado.bloodList.find(x => x.type === sangueSelecionado);
+        //Se já tem o tipo de sangue
+        if(tipoSangue === undefined)
+            bloodCenterSelecionado.bloodList.push({"type": sangueSelecionado, "liters": nivel});
+        else
+            bloodCenterSelecionado.bloodList.find(x => x.type === sangueSelecionado).liters = nivel;
+
+        const requestInfo = utils.novoRequestInfo(bloodCenterSelecionado);
+        if(requestInfo == null)
+            window.location = "/login";
+
+        axios.patch(urlUpdate.href, bloodCenterSelecionado, requestInfo)
+            .then(response => {
+                console.log("deu certo")
+            });
+    }
     render(){
         return (
          <div> 
@@ -99,7 +140,7 @@ class GerenciarColetores extends Component {
 
                  {/*COLUNA DO CADASTRO*/}
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30 margem-direita">
-                     <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
+                     <form className="login100-form validate-form"  onSubmit={this.enviaCadastro.bind(this)}>
                          <span className="login100-form-title p-b-55">
                              Cadastrar um Centro Coletor
                          </span>
@@ -139,21 +180,19 @@ class GerenciarColetores extends Component {
                  {/*COLUNA DO GERENCIAMENTO*/}
 
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-                     <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-                     <span className="login100-form-title p-b-55">
-                         Selecione um de seus centros coletores
-                     </span>
-                     <p>Lista de hemocentros:</p>
-                     <select>
-                        
-                     {
-                         
-                         this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                     <form className="login100-form validate-form"  onSubmit={this.enviaAtualizaSangue.bind(this)}>
+                         <span className="login100-form-title p-b-55">
+                             Selecione um de seus centros coletores
+                         </span>
+                         <p>Lista de hemocentros:</p>
+                         <select onChange= {this.handleDropdownChangeBloodCenterSelecionado}>
+                         {
+                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                          }
                          </select>
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Escolha o tipo Sanguinio:</p>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
+                            <select id="dropdown" onChange= {this.handleDropdownChangeSangueSelecionado}>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
                                 <option value = "B+">B+</option>
@@ -164,7 +203,7 @@ class GerenciarColetores extends Component {
                                 <option value = "O+">O+</option>
                             </select>
                          </div>
-                         <p>Qual nível de sangue (L):</p>
+                         <p>Nível de sangue atual em litros:</p>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                              <input className="input100" type="text" name="nivel" placeholder="Nivel" ref={(input) => this.nivel = input }/>
