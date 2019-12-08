@@ -11,7 +11,7 @@ import CadastroColetor from './CadastroColetor';
 import GerenciarColetores from './GerenciarColetores';
 import AlterarDadosDoador from './AlterarDadosDoador';
 import ComunicacaoHemocentro from './ComunicacaoHemocentro';
-
+import CadastroRequisitos from './CadastroRequisitos';
 
 
 
@@ -25,6 +25,7 @@ ReactDOM.render(
         <Route path="/gerenciarColetores" component={GerenciarColetores}/>
         <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
         <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
+        <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
 
         
 

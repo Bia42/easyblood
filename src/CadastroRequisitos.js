@@ -11,7 +11,7 @@ import axios from 'axios';
 import Header from './componentes/Header';
 import Map from './componentes/Map';
 
-class ComunicacaoHemocentro extends Component {
+class CadastroRequisitos extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -103,42 +103,21 @@ class ComunicacaoHemocentro extends Component {
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
                      <span className="login100-form-title p-b-55">
-                         Solicitação de sangue
+                         Cadastro de Requisitos
                      </span>
-                     <p>Lista de hemocentros (necessidade):</p>
+                     <p>Lista de hemocentros:</p>
                      <select>  
                          {
                              this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                          }
                     </select>
-
-                     <p>Lista de hemocentros para requisição:</p>
-                     <select>  
-                         {
-                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
-                         }
-                    </select>
-                         <div className="wrap-input100 validate-input m-b-16">
-                            <p>Escolha o tipo Sanguinio:</p>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
-                                <option value = "A+">A+</option>
-                                <option value = "A-">A-</option>
-                                <option value = "B+">B+</option>
-                                <option value = "B-">B-</option>
-                                <option value = "AB+">AB+</option>
-                                <option value = "AB-">AB-</option>
-                                <option value = "O-">O-</option>
-                                <option value = "O+">O+</option>
-                            </select>
-                         </div>
-                         <p>Quantidade (L):</p>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
+                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos" ref={(input) => this.requisitos = input }/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Enviar"/>
+                             <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                         </div>
                  </div>
 
@@ -152,4 +131,4 @@ class ComunicacaoHemocentro extends Component {
        }
 }
 
-export default ComunicacaoHemocentro;
+export default CadastroRequisitos;
