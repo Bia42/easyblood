@@ -92,61 +92,61 @@ class ComunicacaoHemocentro extends Component {
 
     render(){
         return (
-         <div> 
-         <Header/>
-         <div className="limiter">
-             <div className="container-login100">
+         <div>
+             <Header/>
+             <div className="limiter">
+                 <div className="container-login100">
+                     <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                     {/*COLUNA DO GERENCIAMENTO*/}
+                       <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
 
-                 {/*COLUNA DO GERENCIAMENTO*/}
-                   <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
-                     <span className="login100-form-title p-b-55">
-                         Solicitação de sangue
-                     </span>
-                     <p>Lista de hemocentros (necessidade):</p>
-                     <select>  
-                         {
-                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
-                         }
-                    </select>
+                         <span className="login100-form-title p-b-55">
+                             Solicitação de sangue
+                         </span>
+                         <p>Lista de hemocentros (necessidade):</p>
+                         <select>
+                             {
+                                 this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                             }
+                        </select>
 
-                     <p>Lista de hemocentros para requisição:</p>
-                     <select>  
-                         {
-                             this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
-                         }
-                    </select>
-                         <div className="wrap-input100 validate-input m-b-16">
-                            <p>Escolha o tipo Sanguinio:</p>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
-                                <option value = "A+">A+</option>
-                                <option value = "A-">A-</option>
-                                <option value = "B+">B+</option>
-                                <option value = "B-">B-</option>
-                                <option value = "AB+">AB+</option>
-                                <option value = "AB-">AB-</option>
-                                <option value = "O-">O-</option>
-                                <option value = "O+">O+</option>
-                            </select>
-                         </div>
-                         <p>Quantidade (L):</p>
+                         <p>Lista de hemocentros para requisição:</p>
+                         <select>
+                             {
+                                 this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
+                             }
+                        </select>
+                             <div className="wrap-input100 validate-input m-b-16">
+                                <p>Escolha o tipo Sanguinio:</p>
+                                <select id="dropdown" onChange= {this.handleDropdownChange}>
+                                    <option value = "A+">A+</option>
+                                    <option value = "A-">A-</option>
+                                    <option value = "B+">B+</option>
+                                    <option value = "B-">B-</option>
+                                    <option value = "AB+">AB+</option>
+                                    <option value = "AB-">AB-</option>
+                                    <option value = "O-">O-</option>
+                                    <option value = "O+">O+</option>
+                                </select>
+                             </div>
+                             <p>Quantidade (L):</p>
 
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
-                             <span className="focus-input100"></span>
-                         </div>
-                         <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Enviar"/>
-                        </div>
+                             <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                                 <input className="input100" type="text" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
+                                 <span className="focus-input100"></span>
+                             </div>
+                             <div className="container-login100-form-btn p-t-25">
+                                 <input type="submit" className="login100-form-btn"  value = "Enviar"/>
+                            </div>
+
+                        {/*FIM DA COLUNA DO GERENCIAMENTO*/}
+
+                        </form>
+                    </div>
                  </div>
-
-                 {/*FIM DA COLUNA DO GERENCIAMENTO*/}
-                </form>
              </div>
-
          </div>
-         </div>  
         );
        }
 }
