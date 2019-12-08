@@ -24,7 +24,8 @@ class CadastroRequisitos extends Component {
             lat: '',
             lng: '',
             centrosColetores: [],
-            bloodCenterSelecionado: {}
+            bloodCenterSelecionado: {},
+            texto: ""
         };
         var requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -33,6 +34,8 @@ class CadastroRequisitos extends Component {
         axios.get(utils.URL_BASE + '/bloodCenters', utils.novoRequestInfo(""))
             .then(response => {
                 this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
+                this.setState({ bloodCenterSelecionado: response.data["_embedded"].bloodCenters[0]});
+                this.setState({ texto: response.data["_embedded"].bloodCenters[0].requirements});
             });
 
         this.handleDropdownChangeSelecionado = this.handleDropdownChangeSelecionado.bind(this);
@@ -40,8 +43,8 @@ class CadastroRequisitos extends Component {
 
     handleDropdownChangeSelecionado(e) {
         var centroSelecionado = this.state.centrosColetores.find(x => x.name === e.target.value);
-        centroSelecionado.requirements = this.requisitos;
         this.setState({ bloodCenterSelecionado: centroSelecionado});
+        this.setState({ texto: centroSelecionado.requirements});
     }
 
     //https://easybloodteste.herokuapp.com/swagger-ui.html#/
@@ -66,11 +69,15 @@ class CadastroRequisitos extends Component {
         if(requestInfo == null)
             window.location = "/login";
 
+        var selecionado = this.state.bloodCenterSelecionado;
+        selecionado.requirements = this.state.texto;
+        this.setState({ bloodCenterSelecionado: selecionado});
         axios.patch(this.state.bloodCenterSelecionado._links.self.href, this.state.bloodCenterSelecionado, requestInfo)
             .then(response => {
-                console.log("deu certo");
+
             });
     }
+
 
     render(){
         return (
@@ -93,7 +100,8 @@ class CadastroRequisitos extends Component {
                         </select>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos" onChange={(input) => this.requisitos = input.target.value }/>
+                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos"
+                                       value={this.state.texto || ""} onChange={(input) => this.setState({texto: input.target.value}) }/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="container-login100-form-btn p-t-25">
