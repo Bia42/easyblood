@@ -133,7 +133,7 @@ class ComunicacaoHemocentro extends Component {
                              <p>Quantidade (L):</p>
 
                              <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                                 <input className="input100" type="text" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
+                                 <input className="input100" type="text" pattern="[0-9]+$" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
                                  <span className="focus-input100"></span>
                              </div>
                              <div className="container-login100-form-btn p-t-25">
