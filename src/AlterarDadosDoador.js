@@ -15,22 +15,41 @@ class AlterarDadosDoador extends Component {
     constructor(props){
         super(props)
         this.state = {msg:'',
-        selectValue: "",
-        selectValueSexo: ""
-        }
+            doadorBusca: {},
+            dadosDoExame: ""
+        };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleDropdownChange2 = this.handleDropdownChange2.bind(this);
-
-
+        this.procurarCpf = this.procurarCpf.bind(this);
 	}
 
     
-      handleDropdownChange(e) {
-        this.setState({ selectValue: e.target.value });
-      }
-      handleDropdownChange2(e) {
-        this.setState({ selectValueSexo: e.target.value });
-      }
+    handleDropdownChange(e) {
+        var doador = this.state.doadorBusca;
+        doador.bloodType = e.target.value;
+        this.setState({ doadorBusca: doador });
+    }
+    handleDropdownChange2(e) {
+        var doador = this.state.doadorBusca;
+        doador.sex = e.target.value;
+        this.setState({ doadorBusca: doador });
+    }
+    procurarCpf(e) {
+        if(e.target.value.length < 11)
+            return;
+        const requestInfo = utils.novoRequestInfo("");
+        if(requestInfo == null)
+            window.location = "/login";
+
+        axios.get(utils.URL_BASE + "/users/" + e.target.value, requestInfo).then(response => {
+            console.log(response.data.bloodType);
+            if(response.data !== undefined)
+                this.setState({doadorBusca: response.data});
+            else
+                console.log("ERRO");
+
+        });
+    }
       
     envia(event){
 
@@ -39,26 +58,25 @@ class AlterarDadosDoador extends Component {
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
             window.location = "/login";
-        //TODO: TESTAR ISSO AQUI
-		
-		axios.post(utils.URL_BASE + '/public/users',   {
-        cpf: this.cpf.value,
-        name: this.name.value,
-        username: this.username.value,
-        password: this.password.value,
-        passwordConfirm: this.passwordConfirm.value,
-        bloodType: this.state.selectValue,
-        sex: this.state.selectValueSexo,
-        bithDate: this.bithDate.value
-        },requestInfo)
+
+        var body = {
+            cpf: this.cpf.value,
+            name: this.name.value,
+            username: this.username.value,
+            report: this.state.dadosDoExame,
+            sex: this.state.doadorBusca.sex,
+            bloodType: this.state.doadorBusca.bloodType
+        };
+        console.log("enviado");
+        console.log(body);
+		axios.patch(utils.URL_BASE + '/users/' + this.state.doadorBusca.cpf, body, requestInfo)
 		.then(response => {
 			console.log(response);
-			localStorage.setItem('dados', response.data);
-			this.props.history.push("/")
+
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
 			console.log(e);
-            });
+        });
             
     }
     
@@ -78,17 +96,21 @@ class AlterarDadosDoador extends Component {
                          <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
+                             <input className="input100" type="text" name="nome" placeholder="Nome"
+                                    ref={(input) => this.name = input} defaultValue={this.state.doadorBusca.name || ""}/>
                              <span className="focus-input100"></span>
                          </div>
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="cpf" placeholder="CPF" ref={(input) => this.cpf = input }/>
+                             <input className="input100" type="text" name="cpf" placeholder="CPF"
+                                    ref={(input) => this.cpf = input }
+                                    onChange={this.procurarCpf}/>
                              <span className="focus-input100"></span>
                          </div>
                          
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Alterar seu tipo Sanguinio:</p>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
+                            <select id="dropdown" onChange= {this.handleDropdownChange}
+                                    value={this.state.doadorBusca.bloodType}>
                                 <option value = "A+">A+</option>
                                 <option value = "A-">A-</option>
                                 <option value = "B+">B+</option>
@@ -102,19 +124,18 @@ class AlterarDadosDoador extends Component {
 
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Sexo:</p>
-                            <select id="dropdownSexo" onChange= {this.handleDropdownChange2}>
+                            <select id="dropdownSexo" onChange= {this.handleDropdownChange2}
+                                    value={this.state.doadorBusca.sex}>
                                 <option value = "F">F</option>
                                 <option value = "M">M</option>
                                 <option value = "O">Outros</option>
                             </select>
                         </div>
 
-                        <div className="wrap-input100 validate-input m-b-16">
-                            <p>Data de Nascimento:</p>
-                                <input type="date" ref={(input) => this.bithDate = input }/>
-                        </div>
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-                             <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
+                             <input className="input100" type="text" name="email" placeholder="Email"
+                                    ref={(input) => this.username = input }
+                                    defaultValue={this.state.doadorBusca.username}/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-envelope"></span>
@@ -122,7 +143,9 @@ class AlterarDadosDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16">
-                             <textarea className="input100" rows="10" cols="33" type="text" name="dadosDoExame" placeholder="Dados do Exame" ref={(input) => this.dadosDoExame = input }/>
+                             <textarea className="input100" rows="10" cols="33" type="text" name="dadosDoExame" placeholder="Dados do Exame"
+                                       onChange={(input) => this.setState({dadosDoExame: input.target.value}) }
+                                       defaultValue={this.state.doadorBusca.report}/>
                              <span className="focus-input100"></span>
                          </div>                        
                          
