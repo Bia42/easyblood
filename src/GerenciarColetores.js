@@ -137,9 +137,9 @@ class GerenciarColetores extends Component {
                  {/*FIM DA COLUNA DO CADASTRO*/}
 
                  {/*COLUNA DO GERENCIAMENTO*/}
-                   <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
 
+                 <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+                     <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                      <span className="login100-form-title p-b-55">
                          Selecione um de seus centros coletores
                      </span>
@@ -173,10 +173,9 @@ class GerenciarColetores extends Component {
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Atualizar"/>
                         </div>
+                    </form>
                  </div>
-
                  {/*FIM DA COLUNA DO GERENCIAMENTO*/}
-                </form>
              </div>
 
          </div>
