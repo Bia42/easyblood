@@ -35,15 +35,6 @@ class cadastroColetor extends Component {
         // console.log(event);
         // console.log(event.markerPosition.lng);
 
-        this.setState({
-            city: event.city,
-            area: event.area,
-            state: event.state,
-            address: event.address,
-            lat:event.markerPosition.lat,
-            lng:event.markerPosition.lng
-
-        });
     }
     
     envia(event){
@@ -67,11 +58,11 @@ class cadastroColetor extends Component {
                     }, requestInfo)
                     .then(response => {
                         // console.log(response.data.username);
-                        localStorage.setItem('dados', response.data);
-                        this.props.history.push("/")
+                        console.log(response.data);
                     }).catch(e=> {
                     this.setState({msg:'não foi possível cadastrar o centro coletor'});
-                    // console.log(e);
+                    
+                    console.log(e);
                 });
 
             });

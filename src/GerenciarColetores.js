@@ -62,17 +62,6 @@ class GerenciarColetores extends Component {
     escutadorDeInput = event => {
         // console.log(event);
         // console.log(event.markerPosition.lng);
-
-        this.setState({
-            msg:'',
-            city: event.city,
-            area: event.area,
-            state: event.state,
-            address: event.address,
-            lat:event.markerPosition.lat,
-            lng:event.markerPosition.lng
-
-        });
     }
 
     enviaCadastro(event){
@@ -115,7 +104,9 @@ class GerenciarColetores extends Component {
         var nivel = this.nivel.value;
         var sangueSelecionado = this.state.sangueSelecionado;
 
-        if(bloodCenterSelecionado.bloodList.length < 1)
+        
+
+        if(bloodCenterSelecionado.bloodList === null  || bloodCenterSelecionado.bloodList.length < 1)
             bloodCenterSelecionado.bloodList = [];
 
         var tipoSangue = bloodCenterSelecionado.bloodList.find(x => x.type === sangueSelecionado);

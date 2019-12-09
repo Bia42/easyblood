@@ -12,6 +12,8 @@ import GerenciarColetores from './GerenciarColetores';
 import AlterarDadosDoador from './AlterarDadosDoador';
 import ComunicacaoHemocentro from './ComunicacaoHemocentro';
 import CadastroRequisitos from './CadastroRequisitos';
+import VerificarNiveis from './VerificarNiveis';
+
 
 
 
@@ -26,6 +28,8 @@ ReactDOM.render(
         <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
         <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
         <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
+        <Route path="/verificarNiveis" component={VerificarNiveis}/>
+
 
         
 
