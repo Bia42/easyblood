@@ -73,7 +73,10 @@ class ComunicacaoHemocentro extends Component {
         console.log(data);
         axios.post( utils.URL_BASE + '/requests', data, requestInfo)
             .then(response => {
+                alert("Seu pedido foi salvo e será visualizado na Home do nosso Sistema!")
                 console.log("deu certo");
+                window.location = "/";
+
             });
     }
 

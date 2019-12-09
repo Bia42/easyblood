@@ -72,7 +72,7 @@ class AlterarDadosDoador extends Component {
 		axios.patch(utils.URL_BASE + '/users/' + this.state.doadorBusca.cpf, body, requestInfo)
 		.then(response => {
 			console.log(response);
-
+            alert("Os dados foram atualizados!");
 			}).catch(e=> {
 				this.setState({msg:'não foi possível fazer o login'});
 			console.log(e);
@@ -93,7 +93,7 @@ class AlterarDadosDoador extends Component {
                              Alterar dados do Doador
                          </span>
      
-                         <span>{this.state.msg}</span>
+                         <span className="wrap-input100 validate-input m-b-16" > Digite O CPF para Buscar</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                              <input className="input100" type="text" name="nome" placeholder="Nome"
@@ -108,7 +108,7 @@ class AlterarDadosDoador extends Component {
                          </div>
                          
                          <div className="wrap-input100 validate-input m-b-16">
-                            <p>Alterar seu tipo Sanguinio:</p>
+                            <p>Alterar o tipo Sanguinio:</p>
                             <select id="dropdown" onChange= {this.handleDropdownChange}
                                     value={this.state.doadorBusca.bloodType}>
                                 <option value = "A+">A+</option>
@@ -135,7 +135,7 @@ class AlterarDadosDoador extends Component {
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
                              <input className="input100" type="text" name="email" placeholder="Email"
                                     ref={(input) => this.username = input }
-                                    defaultValue={this.state.doadorBusca.username}/>
+                                    defaultValue={this.state.doadorBusca.email}/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-envelope"></span>
