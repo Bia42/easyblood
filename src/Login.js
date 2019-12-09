@@ -92,16 +92,6 @@ class Login extends Component{
 							Or login with
 						</span>
 					</div>
-					
-					<a href="https://docs.microsoft.com/pt-br/visualstudio/ide/navigating-code?view=vs-2019" className="btn-face m-b-10">
-						<i className="fa fa-facebook-official"></i>
-						Facebook
-					</a>
-
-					<a href="#" className="btn-google m-b-10">
-						<i className="fa fa-google-plus"></i>
-						Google
-					</a>
 
 					<div className="text-center w-full p-t-15">
 						<span className="txt1">

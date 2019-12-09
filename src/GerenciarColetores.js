@@ -62,17 +62,6 @@ class GerenciarColetores extends Component {
     escutadorDeInput = event => {
         // console.log(event);
         // console.log(event.markerPosition.lng);
-
-        this.setState({
-            msg:'',
-            city: event.city,
-            area: event.area,
-            state: event.state,
-            address: event.address,
-            lat:event.markerPosition.lat,
-            lng:event.markerPosition.lng
-
-        });
     }
 
     enviaCadastro(event){
