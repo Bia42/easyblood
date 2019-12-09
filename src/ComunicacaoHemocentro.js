@@ -23,7 +23,11 @@ class ComunicacaoHemocentro extends Component {
             address: '',
             lat: '',
             lng: '',
-            centrosColetores: []
+            centrosColetores: [],
+            inNeed: {},
+            requested: {},
+            liters: {},
+            bloodType: ""
         };
         var requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -31,18 +35,14 @@ class ComunicacaoHemocentro extends Component {
 
         axios.get(utils.URL_BASE + '/bloodCenters', utils.novoRequestInfo(""))
             .then(response => {
-                this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
+                this.setState({ centrosColetores: response.data["_embedded"].bloodCenters,
+                                      inNeed: response.data["_embedded"].bloodCenters[0],
+                                      requested: response.data["_embedded"].bloodCenters[0],
+                                      liters: 0,
+                                      bloodType: "A+"});
             });
 	}
-    
-    envia1(event){
-		event.preventDefault();
-        const requestInfo = utils.novoRequestInfo("");
-        if(requestInfo == null)
-            window.location = "/login";
-    }
 
-    //https://easybloodteste.herokuapp.com/swagger-ui.html#/
     escutadorDeInput = event => {
         // console.log(event);
         // console.log(event.markerPosition.lng);
@@ -63,31 +63,18 @@ class ComunicacaoHemocentro extends Component {
         const requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
             window.location = "/login";
-        //TODO: TESTAR ISSO AQUI
 
-        axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
+        var data = {
+            liters: this.state.liters,
+            inNeed: this.state.inNeed,
+            requested: this.state.requested,
+            bloodType: this.state.bloodType
+        };
+        console.log(data);
+        axios.post( utils.URL_BASE + '/requests', data, requestInfo)
             .then(response => {
-                axios.post(utils.URL_BASE + '/bloodCenters',
-                    {
-                        name:this.name.value,
-                        address:{
-                            longitude: this.state.lng,
-                            latitude: this.state.lat
-                        },
-                        imageURL:this.urlImagem.value,
-                        user: response.data
-                    }, requestInfo)
-                    .then(response => {
-                        // console.log(response.data.username);
-                        localStorage.setItem('dados', response.data);
-                        this.props.history.push("/")
-                    }).catch(e=> {
-                    this.setState({msg:'não foi possível cadastrar o centro coletor'});
-                    // console.log(e);
-                });
-
+                console.log("deu certo");
             });
-
     }
 
     render(){
@@ -105,21 +92,24 @@ class ComunicacaoHemocentro extends Component {
                              Solicitação de sangue
                          </span>
                          <p>Lista de hemocentros (necessidade):</p>
-                         <select>
+                         <select value={this.state.inNeed}
+                                 onChange={(e) => this.setState({inNeed: this.state.centrosColetores.find(x => x.name === e.target.value)})}>
                              {
                                  this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                              }
                         </select>
 
                          <p>Lista de hemocentros para requisição:</p>
-                         <select>
+                         <select value={this.state.requested}
+                                 onChange={(e) => this.setState({requested: this.state.centrosColetores.find(x => x.name === e.target.value)})}>
                              {
                                  this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                              }
                         </select>
                              <div className="wrap-input100 validate-input m-b-16">
                                 <p>Escolha o tipo Sanguinio:</p>
-                                <select id="dropdown" onChange= {this.handleDropdownChange}>
+                                <select id="dropdown" value={this.state.bloodType}
+                                                    onChange={(e) => this.setState({bloodType: e.target.value})}>
                                     <option value = "A+">A+</option>
                                     <option value = "A-">A-</option>
                                     <option value = "B+">B+</option>
@@ -133,7 +123,8 @@ class ComunicacaoHemocentro extends Component {
                              <p>Quantidade (L):</p>
 
                              <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                                 <input className="input100" type="text" pattern="[0-9]+$" name="nivel" placeholder="quantidade" ref={(input) => this.quantidade = input }/>
+                                 <input className="input100" type="text" pattern="[0-9]+$" name="nivel" placeholder="quantidade"
+                                        onChange={(e) => this.setState({liters: e.target.value})}/>
                                  <span className="focus-input100"></span>
                              </div>
                              <div className="container-login100-form-btn p-t-25">
