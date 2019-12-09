@@ -11,7 +11,7 @@ import axios from 'axios';
 import Header from './componentes/Header';
 import Map from './componentes/Map';
 
-class CadastroRequisitos extends Component {
+class VerificarNiveis extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -25,7 +25,9 @@ class CadastroRequisitos extends Component {
             lng: '',
             centrosColetores: [],
             bloodCenterSelecionado: {},
-            texto: ""
+            texto: "",
+            bloodList: []
+
         };
         var requestInfo = utils.novoRequestInfo("");
         if(requestInfo == null)
@@ -36,6 +38,9 @@ class CadastroRequisitos extends Component {
                 this.setState({ centrosColetores: response.data["_embedded"].bloodCenters });
                 this.setState({ bloodCenterSelecionado: response.data["_embedded"].bloodCenters[0]});
                 this.setState({ texto: response.data["_embedded"].bloodCenters[0].requirements});
+
+
+                console.log(this.state.bloodCenterSelecionado);
             });
 
         this.handleDropdownChangeSelecionado = this.handleDropdownChangeSelecionado.bind(this);
@@ -44,7 +49,10 @@ class CadastroRequisitos extends Component {
     handleDropdownChangeSelecionado(e) {
         var centroSelecionado = this.state.centrosColetores.find(x => x.name === e.target.value);
         this.setState({ bloodCenterSelecionado: centroSelecionado});
-        this.setState({ texto: centroSelecionado.requirements});
+        var list = centroSelecionado.bloodList;
+
+        this.setState({bloodList: list});
+
     }
 
     //https://easybloodteste.herokuapp.com/swagger-ui.html#/
@@ -63,23 +71,6 @@ class CadastroRequisitos extends Component {
         });
     }
 
-    envia(event){
-        event.preventDefault();
-        const requestInfo = utils.novoRequestInfo("");
-        if(requestInfo == null)
-            window.location = "/login";
-
-        var selecionado = this.state.bloodCenterSelecionado;
-        selecionado.requirements = this.state.texto;
-        this.setState({ bloodCenterSelecionado: selecionado});
-        axios.patch(this.state.bloodCenterSelecionado._links.self.href, this.state.bloodCenterSelecionado, requestInfo)
-            .then(response => {
-                alert('Pré Requisitos foram atualizados');
-
-            });
-    }
-
-
     render(){
         return (
          <div> 
@@ -88,10 +79,10 @@ class CadastroRequisitos extends Component {
              <div className="container-login100">
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                  {/*COLUNA DO GERENCIAMENTO*/}
-                   <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
+                   <form className="login100-form validate-form" >
 
                          <span className="login100-form-title p-b-55">
-                             Cadastro de Requisitos
+                             Verificar Niveis
                          </span>
                          <p>Lista de hemocentros:</p>
                          <select onChange= {this.handleDropdownChangeSelecionado}>
@@ -99,15 +90,15 @@ class CadastroRequisitos extends Component {
                                  this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                              }
                         </select>
-
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <textarea className="input100" type="text" name="requisitos" placeholder="requisitos"
-                                       value={this.state.texto || ""} onChange={(input) => this.setState({texto: input.target.value}) }/>
-                             <span className="focus-input100"></span>
-                         </div>
-                         <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
-                        </div>
+                      
+                        <ul>
+                            {
+                                this.state.bloodList.map((centro, i)  => (
+                                <li key={i}> Tipo: {centro.type} Litros: {centro.liters} </li>
+                            ))}
+                         </ul>
+                                   
+                         
                    </form>
                  </div>
 
@@ -122,4 +113,4 @@ class CadastroRequisitos extends Component {
        /**/
 }
 
-export default CadastroRequisitos;
+export default VerificarNiveis;
