@@ -24,9 +24,9 @@ class ComunicacaoHemocentro extends Component {
             lat: '',
             lng: '',
             centrosColetores: [],
-            inNeed: {},
-            requested: {},
-            liters: {},
+            inNeed: "",
+            requested: "{}",
+            liters: 0,
             bloodType: ""
         };
         var requestInfo = utils.novoRequestInfo("");
@@ -36,8 +36,8 @@ class ComunicacaoHemocentro extends Component {
         axios.get(utils.URL_BASE + '/bloodCenters', utils.novoRequestInfo(""))
             .then(response => {
                 this.setState({ centrosColetores: response.data["_embedded"].bloodCenters,
-                                      inNeed: response.data["_embedded"].bloodCenters[0],
-                                      requested: response.data["_embedded"].bloodCenters[0],
+                                      inNeed: response.data["_embedded"].bloodCenters[0].name,
+                                      requested: response.data["_embedded"].bloodCenters[0].name,
                                       liters: 0,
                                       bloodType: "A+"});
             });
@@ -92,23 +92,23 @@ class ComunicacaoHemocentro extends Component {
                              Solicitação de sangue
                          </span>
                          <p>Lista de hemocentros (necessidade):</p>
-                         <select value={this.state.inNeed}
-                                 onChange={(e) => this.setState({inNeed: this.state.centrosColetores.find(x => x.name === e.target.value)})}>
+                         <select
+                                 onChange={(e) => this.setState({inNeed: e.target.value})}>
                              {
                                  this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                              }
                         </select>
 
                          <p>Lista de hemocentros para requisição:</p>
-                         <select value={this.state.requested}
-                                 onChange={(e) => this.setState({requested: this.state.centrosColetores.find(x => x.name === e.target.value)})}>
+                         <select
+                                 onChange={(e) => this.setState({requested: e.target.value})}>
                              {
                                  this.state.centrosColetores.map((centro, i) => <option key={i}>{centro.name}</option>)
                              }
                         </select>
                              <div className="wrap-input100 validate-input m-b-16">
                                 <p>Escolha o tipo Sanguinio:</p>
-                                <select id="dropdown" value={this.state.bloodType}
+                                <select id="dropdown"
                                                     onChange={(e) => this.setState({bloodType: e.target.value})}>
                                     <option value = "A+">A+</option>
                                     <option value = "A-">A-</option>

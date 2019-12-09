@@ -5,8 +5,28 @@ import './App.css';
 
 import Header from './componentes/Header';
 import Map from "./componentes/Map";
+import * as utils from "./utils/utils";
+import axios from "axios";
 
 class App extends Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            requests: []
+        };
+        var requestInfo = utils.novoRequestInfo("");
+        if (requestInfo == null)
+            window.location = "/login";
+
+        axios.get(utils.URL_BASE + '/requests', utils.novoRequestInfo(""))
+            .then(response => {
+                console.log("response");
+                console.log(response);
+                console.log("response");
+                this.setState({requests: response.data["_embedded"].requests});
+            });
+    }
 
   render(){
    return (
@@ -31,18 +51,15 @@ class App extends Component{
                 </p>
 
 
-                <h2  className="content-head is-center">Esses são os centros coletores cadastrados</h2>
-
-                <Map
-                    google={this.props.google}
-                    center={{lat: -22.904762, lng: -47.061180}}
-                    height='600px'
-                    zoom={12.1}
-                    escutadorDeInput={this.escutadorDeInput}
-                />
+                <h2  className="content-head is-center">Requisições de sangue</h2>
+                <ul>
+                    {
+                        this.state.requests.map((req, i)  => (
+                            <li key={i}> O centro "{req.inNeed}" pediu {req.liters} litros de {req.bloodType} para o centro "{req.requested}" </li>
+                        ))}
+                </ul>
             </div>
         </div>
-
 
 
 
