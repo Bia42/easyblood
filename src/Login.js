@@ -27,7 +27,7 @@ class Login extends Component{
 			}
         };
 		
-		axios.post( utils.URL_BASE + '/users/login',null, requestInfo)
+		axios.post( utils.URL_BASE + '/rest/hemocentro/login',null, requestInfo)
 		.then(response => {
 			// console.log("response:");
 			// console.log(response);

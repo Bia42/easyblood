@@ -1,4 +1,4 @@
-export const URL_BASE = "https://easybloodteste.herokuapp.com";
+export const URL_BASE = "https://doemais-hom.herokuapp.com";
 
 export function novoRequestInfo(body) {
     let auth = localStorage.getItem("Authorization");

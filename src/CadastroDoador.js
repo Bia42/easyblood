@@ -37,27 +37,20 @@ class CadastroDoador extends Component {
 
 		event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
-        if(requestInfo == null)
-            window.location = "/login";
-        //TODO: TESTAR ISSO AQUI
 		
-		axios.post(utils.URL_BASE + '/public/users',   {
+		axios.post('/rest/hemocentro/add',   {
         cpf: this.cpf.value,
-        name: this.name.value,
-        username: this.username.value,
-        password: this.password.value,
-        passwordConfirm: this.passwordConfirm.value,
-        bloodType: this.state.selectValue,
-        sex: this.state.selectValueSexo,
-        bithDate: this.bithDate.value
-        },requestInfo)
+        nome: this.name.value,
+        senha: this.password.value,
+        data_nascimento: this.bithDate.value
+        })
 		.then(response => {
 			console.log(response);
-			localStorage.setItem('dados', response.data);
-			this.props.history.push("/")
-			}).catch(e=> {
+			//localStorage.setItem('dados', response.data);
+			//this.props.history.push("/")
+			}).catch(error=> {
 				this.setState({msg:'não foi possível fazer o login'});
-			console.log(e);
+			console.log(error);
             });
             
     }
