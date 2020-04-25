@@ -27,7 +27,14 @@ class Login extends Component{
 			}
         };
 		
+<<<<<<< HEAD
 		axios.post('/rest/hemocentro/login',null, requestInfo)
+=======
+		axios.post('/rest/hemocentro/login',{
+			email: this.username.value,
+			senha: this.password.value,
+			})
+>>>>>>> ae4dd78a904b0fbcca953998b3d270a4258c631c
 		.then(response => {
 			// console.log("response:");
 			// console.log(response);
@@ -36,11 +43,10 @@ class Login extends Component{
 			})
 			.catch(e=> {
 				// console.log("e.resp:");
-				// console.log(e.response.status);
-				if(e.response.status === 401)
+				 console.log(e.response.status);
+
 					this.setState({msg:'Usuario e/ou senha incorretos'});
-				else
-					this.setState({msg:'não foi possível fazer o login'});
+			
 			});
     }
 
@@ -86,13 +92,6 @@ class Login extends Component{
 					<div className="container-login100-form-btn p-t-25">
 						<input type="submit" className="login100-form-btn"  value = "Login"/>
 					</div>
-
-					<div className="text-center w-full p-t-42 p-b-22">
-						<span className="txt1">
-							Or login with
-						</span>
-					</div>
-
 					<div className="text-center w-full p-t-15">
 						<span className="txt1">
 							Não está cadastrado?

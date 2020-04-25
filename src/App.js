@@ -11,12 +11,12 @@ import axios from "axios";
 class App extends Component{
 
     constructor(props) {
-        super(props);
-        this.state = {
+       super(props);
+     /*    this.state = {
             requests: []
         };
-        var requestInfo = utils.novoRequestInfo("");
-        if (requestInfo == null)
+       var requestInfo = utils.novoRequestInfo("");
+    if (requestInfo == null)
             window.location = "/login";
 
         axios.get(utils.URL_BASE + '/requests', utils.novoRequestInfo(""))
@@ -26,6 +26,7 @@ class App extends Component{
                 console.log("response");
                 this.setState({requests: response.data["_embedded"].requests});
             });
+            */
     }
 
   render(){
@@ -43,15 +44,15 @@ class App extends Component{
                 </h1>
             </div>
         </div>
-
-        <div id="content-wrapper" className="content-wrapper">
+        
+    { /*  <div id="content-wrapper" className="content-wrapper">
             <div className="content">
                 <p>
                     <a href="#content-wrapper" className="pure-button pure-button-primary buscar">Consultar centros coletores</a>
                 </p>
 
 
-                <h2  className="content-head is-center">Requisições de sangue</h2>
+             <h2  className="content-head is-center">Requisições de sangue</h2>
                 <ul>
                     {
                         this.state.requests.map((req, i)  => (
@@ -59,8 +60,8 @@ class App extends Component{
                         ))}
                 </ul>
             </div>
-        </div>
-
+        </div>*/} 
+                            
 
 
     </div>
