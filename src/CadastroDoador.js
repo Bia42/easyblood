@@ -8,41 +8,98 @@ import './css/vendor/animate/animate.css';
 import axios from 'axios';
 import Header from './componentes/Header';
 import * as utils from "./utils/utils";
-
-
+import { cpfMask } from "./utils/mask";
+import format from 'date-fns/format'
 
 class CadastroDoador extends Component {
     constructor(props){
         super(props)
         this.state = {msg:'',
         selectValue: "",
-        selectValueSexo: ""
+        selectValueSexo: "",
+        selectValueFuncao: "",
+        usersHemocentros: [],
+        selectValueUsersHemocentros:"",
+        selectCPF:"",
+        selectCPF:""
         }
+
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleDropdownChange2 = this.handleDropdownChange2.bind(this);
+        this.handleDropdownChange3 = this.handleDropdownChange3.bind(this);
+        this.handleDropdownChange4 = this.handleDropdownChange4.bind(this);
+        this.handleDropdownChange5 = this.handleDropdownChange5.bind(this);
 
-
-	}
-
+    }
     
+    componentDidMount(){
+        fetch('/rest/hemocentro/listHemocentros')
+        .then (response => response.json())
+        .then (listHemocentros => this.setState({usersHemocentros: listHemocentros}));
+      }
+
       handleDropdownChange(e) {
         this.setState({ selectValue: e.target.value });
       }
       handleDropdownChange2(e) {
         this.setState({ selectValueSexo: e.target.value });
       }
+      handleDropdownChange3(e) {
+        this.setState({ selectValueFuncao: e.target.value });
+      }
+      handleDropdownChange4(e) {
+        this.setState({ selectValueUsersHemocentros: e.target.value });
+      }
+      handleDropdownChange5(e) {
+        this.setState({ selectCPF: cpfMask(e.target.value) });
+      }
       
     envia(event){
 
-
 		event.preventDefault();
-        const requestInfo = utils.novoRequestInfo("");
+        const requestInfo = utils.novoRequestInfo("")
+
+        const valida = utils.validaCPF(this.cpf.value);
+        if(valida == 'false')
+            alert("CPF Inválido!");
+
+        var hemocentro_id = parseInt(this.state.selectValueUsersHemocentros, 10);
+        var data_nascimento = new Date(this.bithDate.value).toJSON();
+
+        console.log({
+            cpf: this.cpf.value,
+            nome: this.name.value,
+            senha: this.password.value,
+            email: this.email.value,
+            telefone: this.telefone.value,
+            estado: this.estado.value,
+            cidade: this.cidade.value,
+            endereco: this.endereco.value,
+            numero: this.numero.value,
+            cep: this.cep.value,
+            complemento: this.complemento.value,
+            sexo: this.state.selectValueSexo,
+            funcao: this.state.selectValueFuncao,
+            data_nascimento: data_nascimento,
+            hemocentro_id: hemocentro_id
+            });
 		
 		axios.post('/rest/hemocentro/add',   {
         cpf: this.cpf.value,
         nome: this.name.value,
         senha: this.password.value,
-        data_nascimento: this.bithDate.value
+        email: this.email.value,
+        telefone: this.telefone.value,
+        estado: this.estado.value,
+        cidade: this.cidade.value,
+        endereco: this.endereco.value,
+        numero: this.numero.value,
+        cep: this.cep.value,
+        complemento: this.complemento.value,
+        sexo: this.state.selectValueSexo,
+        funcao: this.state.selectValueFuncao,
+        data_nascimento: data_nascimento,
+        hemocentro_id: hemocentro_id
         })
 		.then(response => {
 			console.log(response);
@@ -57,7 +114,6 @@ class CadastroDoador extends Component {
     
     render(){
         return (
-        
          <div> 
          <Header/>
          <div className="limiter">
@@ -65,7 +121,7 @@ class CadastroDoador extends Component {
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                          <span className="login100-form-title p-b-55">
-                             Cadastro de Doador
+                             Cadastro de Usuário
                          </span>
      
                          <span>{this.state.msg}</span>
@@ -73,49 +129,118 @@ class CadastroDoador extends Component {
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                              <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
                              <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                                <span className="lnr lnr-user"></span>
+                             </span>
                          </div>
+
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="cpf" placeholder="CPF" ref={(input) => this.cpf = input }/>
+                             <input className="input100" type="text" name="cpf" maxLength="14" placeholder="CPF" onChange={this.handleDropdownChange5} ref={(input) => this.cpf = input }/>
                              <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                                <span className="lnr lnr-license"></span>
+                             </span>
                          </div>
-                         
-                         <div className="wrap-input100 validate-input m-b-16">
-                            <p>Escolha seu tipo Sanguinio:</p>
-                            <select id="dropdown" onChange= {this.handleDropdownChange}>
-                                <option value = "A+">A+</option>
-                                <option value = "A-">A-</option>
-                                <option value = "B+">B+</option>
-                                <option value = "B-">B-</option>
-                                <option value = "AB+">AB+</option>
-                                <option value = "AB-">AB-</option>
-                                <option value = "O-">O-</option>
-                                <option value = "O+">O+</option>
-                            </select>
+
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                             <input className="input100" type="text" name="telefone" maxLength="14" placeholder="Telefone" ref={(input) => this.telefone = input }/>
+                             <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                                <span className="lnr lnr-phone-handset"></span>
+                             </span>
                          </div>
+
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                             <input className="input100" type="text" name="cep" maxLength="20" placeholder="CEP" ref={(input) => this.cep = input }/>
+                             <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                                <span className="lnr lnr-pushpin"></span>
+                             </span>
+                         </div>
+
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                             <input className="input100" type="text" name="estado" maxLength="2" placeholder="UF" ref={(input) => this.estado = input }/>
+                             <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                             <span className="lnr lnr-map-marker"></span>
+                             </span>
+                         </div>
+
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <input className="input100" type="text" name="cidade" maxLength="10" placeholder="Cidade" ref={(input) => this.cidade = input }/>
+                            <span className="focus-input100"></span>
+                            <span className="symbol-input100">
+                            <span className="lnr lnr-map"></span>
+                            </span>
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                             <input className="input100" type="text" name="endereco" maxLength="500" placeholder="Endereco" ref={(input) => this.endereco = input }/>
+                             <span className="focus-input100"></span>
+                             <span className="symbol-input100">
+                                <span className="lnr lnr-location"></span>
+                             </span>
+                         </div>
+
+                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <input className="input100" type="text" name="numero" maxLength="10" placeholder="Número" ref={(input) => this.numero = input }/>
+                            <span className="focus-input100"></span>
+                            <span className="symbol-input100">
+                                <span className="lnr lnr-home"></span>
+                            </span>
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <input className="input100" type="text" name="complemento" maxLength="200" placeholder="Complemento" ref={(input) => this.complemento = input }/>
+                            <span className="focus-input100"></span>
+                            <span className="symbol-input100">
+                                <span className="lnr lnr-text-align-left"></span>
+                            </span>
+                        </div>
 
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Sexo:</p>
-                            <select id="dropdownSexo" onChange= {this.handleDropdownChange2}>
-                                <option value = "F">F</option>
-                                <option value = "M">M</option>
+                            <select id="dropdownSexo" onChange={this.handleDropdownChange2}>
+                                <option value = "F">Feminino</option>
+                                <option value = "M">Masculino</option>
                                 <option value = "O">Outros</option>
                             </select>
                         </div>
 
                         <div className="wrap-input100 validate-input m-b-16">
                             <p>Data de Nascimento:</p>
-                                <input type="date" ref={(input) => this.bithDate = input }/>
+                                <input type="Date" ref={(input) => this.bithDate = input }/>
                         </div>
+
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-                             <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
+                             <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.email = input }/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-envelope"></span>
                              </span>
                          </div>
+
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Função:</p>
+                            <select id="dropdownFuncao" onChange={this.handleDropdownChange3}>
+                                <option value = "admin">Administrador</option>
+                                <option value = "tecnico">Tecnico</option>
+                                <option value = "diretor">Diretor</option>
+                                <option value = "outro">Outro</option>
+                            </select>
+                        </div>
+
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Lista de hemocentros:</p>
+                            <select id="dropdownHemocentros" onChange={this.handleDropdownChange4}>
+                                    {this.state.usersHemocentros.map(usersHemocentros =>(
+                                        <option key={usersHemocentros.id} value = {usersHemocentros.id}>{usersHemocentros.razaoSocial}</option>
+                                    ))}
+                            </select>
+                        </div>
      
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input }/>
+                             <input className="input100" type="password" name="pass" placeholder="Senha" ref={(input) => this.password = input }/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-lock"></span>
@@ -123,14 +248,13 @@ class CadastroDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Confirmar Password" ref={(input) => this.passwordConfirm = input }/>
+                             <input className="input100" type="password" name="pass" placeholder="Confirmar Senha" ref={(input) => this.passwordConfirm = input }/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-lock"></span>
                              </span>
                          </div>
      
-                         
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
