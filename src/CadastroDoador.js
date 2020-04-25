@@ -80,8 +80,8 @@ class CadastroDoador extends Component {
             complemento: this.complemento.value,
             sexo: this.state.selectValueSexo,
             funcao: this.state.selectValueFuncao,
-            data_nascimento: data_nascimento,
-            hemocentro_id: hemocentro_id
+            dataNascimento: data_nascimento,
+            hemocentroId: hemocentro_id
             });
 		
 		axios.post('/rest/hemocentro/add',   {
@@ -98,8 +98,8 @@ class CadastroDoador extends Component {
         complemento: this.complemento.value,
         sexo: this.state.selectValueSexo,
         funcao: this.state.selectValueFuncao,
-        data_nascimento: data_nascimento,
-        hemocentro_id: hemocentro_id
+        dataNascimento: data_nascimento,
+        hemocentroId: hemocentro_id
         })
 		.then(response => {
 			console.log(response);

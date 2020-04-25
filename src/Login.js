@@ -27,14 +27,10 @@ class Login extends Component{
 			}
         };
 		
-<<<<<<< HEAD
-		axios.post('/rest/hemocentro/login',null, requestInfo)
-=======
 		axios.post('/rest/hemocentro/login',{
 			email: this.username.value,
 			senha: this.password.value,
 			})
->>>>>>> ae4dd78a904b0fbcca953998b3d270a4258c631c
 		.then(response => {
 			// console.log("response:");
 			// console.log(response);
