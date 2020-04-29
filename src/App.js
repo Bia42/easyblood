@@ -37,7 +37,7 @@ class App extends Component{
         <div className="splash-container">
             <div className="splash">
                 <h1 className="splash-head">
-                <img src="../logo.png" className="pure-img-responsive"></img>
+                <img src="../logo.png" className="pure-img-responsive"/>
                 <p className="splash-subhead">
                     Existe um centro coletor precisando de você!
                 </p>

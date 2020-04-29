@@ -14,7 +14,7 @@ export default class Header extends Component{
         var header =
         <div className="header">
               <div className="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-                  <a className="header-logo pure-menu-heading" href="">Easy Blood</a>
+                  <a className="header-logo pure-menu-heading" href="">DoeMais</a>
                   <ul className="pure-menu-list">
                       <li className="pure-menu-item pure-menu-selected"><Link to="/" className="pure-menu-link">Home</Link></li>
 
