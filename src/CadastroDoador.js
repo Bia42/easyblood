@@ -106,7 +106,7 @@ class CadastroDoador extends Component {
         })
 		.then(response => {
             console.log(response);
-            //window.location = "/login";
+            window.location = "/login";
 			//localStorage.setItem('dados', response.data);
 			//this.props.history.push("/")
 			}).catch(error=> {
