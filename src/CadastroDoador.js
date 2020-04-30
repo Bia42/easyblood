@@ -20,7 +20,6 @@ class CadastroDoador extends Component {
         selectValueFuncao: "",
         usersHemocentros: [],
         selectValueUsersHemocentros:"",
-        selectCPF:"",
         selectCPF:""
         }
 
@@ -110,7 +109,7 @@ class CadastroDoador extends Component {
 			//localStorage.setItem('dados', response.data);
 			//this.props.history.push("/")
 			}).catch(error=> {
-				this.setState({msg:'não foi possível fazer o login'});
+				this.setState({msg:'não foi possível fazer o Cadastro'});
 			console.log(error);
             });
             
