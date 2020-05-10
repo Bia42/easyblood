@@ -40,8 +40,9 @@ class Login extends Component{
 			.catch(e=> {
 				// console.log("e.resp:");
 				 console.log(e.response.status);
+				 console.log(e.response.data);
 
-					this.setState({msg:'Usuario e/ou senha incorretos'});
+					this.setState({msg: e.response.data});
 			
 			});
     }
@@ -63,7 +64,7 @@ class Login extends Component{
 					<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
 					<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input }/>
+						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<span className="lnr lnr-envelope"></span>
@@ -71,7 +72,7 @@ class Login extends Component{
 					</div>
 
 					<div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input }/>
+						<input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input } required/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<span className="lnr lnr-lock"></span>
