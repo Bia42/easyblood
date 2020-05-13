@@ -64,12 +64,7 @@ class CadastroDoador extends Component {
             window.scrollTo(0, 0);
             return false;
         }
-        const validaTel = utils.validaTelefone(this.telefone.value);
-        if(validaTel === false){
-            this.setState({msg: "Telefone Inválido!"});
-            window.scrollTo(0, 0);
-            return false;
-        }
+        
         if(this.state.selectValueUsersHemocentros !== null)    
             var hemocentro_id = parseInt(this.state.selectValueUsersHemocentros, 10);
 
@@ -234,7 +229,7 @@ class CadastroDoador extends Component {
 
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Função:</p>
-                            <select id="dropdownFuncao" onChange={this.handleDropdownChange3}>
+                            <select id="dropdownFuncao" onChange={this.handleDropdownChange3} required>
                                 <option value="">Selecione uma opção</option>
                                 <option value = "admin">Administrador</option>
                                 <option value = "tecnico">Tecnico</option>
@@ -245,7 +240,7 @@ class CadastroDoador extends Component {
 
                          <div className="wrap-input100 validate-input m-b-16">
                             <p>Lista de hemocentros:</p>
-                            <select id="dropdownHemocentros" onChange={this.handleDropdownChange4}>
+                            <select id="dropdownHemocentros" onChange={this.handleDropdownChange4} required>
                                 <option value="">Selecione uma opção</option>    
                                 {this.state.usersHemocentros.map(usersHemocentros =>(
                                     <option key={usersHemocentros.id} value = {usersHemocentros.id}>{usersHemocentros.razaoSocial}</option>
