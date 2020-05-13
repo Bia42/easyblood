@@ -35,6 +35,14 @@ export function validaCPF(strCPF) {
     return true;
 }
 
+export function validaTelefone(strTel) {
+    var regex = new RegExp('^\\(((1[1-9])|([2-9][0-9]))\\)((3[0-9]{3}-[0-9]{4})|(9[0-9]{3}-[0-9]{5}))$'); 
+    if (regex.test(strTel)) { 
+        return true;
+    }
+    else return false;
+}
+
 export function logout() {
     localStorage.removeItem("Authorization");
 }

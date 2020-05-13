@@ -58,10 +58,18 @@ class CadastroDoador extends Component {
 		event.preventDefault();
         const requestInfo = utils.novoRequestInfo("")
 
-        const valida = utils.validaCPF(this.cpf.value);
-        if(valida === false)
-            alert("CPF Inválido!");
-
+        const validaCPF = utils.validaCPF(this.cpf.value);
+        if(validaCPF === false){
+            this.setState({msg:"CPF Inválido!"});
+            window.scrollTo(0, 0);
+            return false;
+        }
+        const validaTel = utils.validaTelefone(this.telefone.value);
+        if(validaTel === false){
+            this.setState({msg: "Telefone Inválido!"});
+            window.scrollTo(0, 0);
+            return false;
+        }
         if(this.state.selectValueUsersHemocentros !== null)    
             var hemocentro_id = parseInt(this.state.selectValueUsersHemocentros, 10);
 
@@ -105,12 +113,12 @@ class CadastroDoador extends Component {
         })
 		.then(response => {
             console.log(response);
-            window.location = "/login";
+            //window.location = "/login";
 			//localStorage.setItem('dados', response.data);
 			//this.props.history.push("/")
 			}).catch(error=> {
-				this.setState({msg:'não foi possível fazer o Cadastro'});
-			console.log(error);
+				this.setState({msg: error.response.data});
+			    console.log(error);
             });
             
     }
@@ -125,12 +133,12 @@ class CadastroDoador extends Component {
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
                          <span className="login100-form-title p-b-55">
                              Cadastro de Usuário
-                         </span>
-     
+                         </span>                         
+                             
                          <span>{this.state.msg}</span>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input }/>
+                             <input className="input100" type="text" name="nome" placeholder="Nome" ref={(input) => this.name = input } required/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                 <span className="lnr lnr-user"></span>
@@ -138,7 +146,7 @@ class CadastroDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="cpf" maxLength="14" placeholder="CPF" onChange={this.handleDropdownChange5} ref={(input) => this.cpf = input }/>
+                             <input className="input100" type="text" name="cpf" maxLength="14" placeholder="CPF" onChange={this.handleDropdownChange5} ref={(input) => this.cpf = input } required/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                 <span className="lnr lnr-license"></span>
@@ -146,7 +154,7 @@ class CadastroDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-                              <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.email = input }/>
+                              <input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.email = input } required/>
                               <span className="focus-input100"></span>
                               <span className="symbol-input100">
                                   <span className="lnr lnr-envelope"></span>
@@ -246,7 +254,7 @@ class CadastroDoador extends Component {
                         </div>
      
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Senha" ref={(input) => this.password = input }/>
+                             <input className="input100" type="password" name="pass" placeholder="Senha" ref={(input) => this.password = input } required/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-lock"></span>
@@ -254,7 +262,7 @@ class CadastroDoador extends Component {
                          </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                             <input className="input100" type="password" name="pass" placeholder="Confirmar Senha" ref={(input) => this.passwordConfirm = input }/>
+                             <input className="input100" type="password" name="pass" placeholder="Confirmar Senha" ref={(input) => this.passwordConfirm = input } required/>
                              <span className="focus-input100"></span>
                              <span className="symbol-input100">
                                  <span className="lnr lnr-lock"></span>
