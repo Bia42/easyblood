@@ -64,7 +64,7 @@ class CadastroDoador extends Component {
             window.scrollTo(0, 0);
             return false;
         }
-        
+
         if(this.state.selectValueUsersHemocentros !== null)    
             var hemocentro_id = parseInt(this.state.selectValueUsersHemocentros, 10);
 
@@ -108,7 +108,7 @@ class CadastroDoador extends Component {
         })
 		.then(response => {
             console.log(response);
-            //window.location = "/login";
+            window.location = "/login";
 			//localStorage.setItem('dados', response.data);
 			//this.props.history.push("/")
 			}).catch(error=> {
