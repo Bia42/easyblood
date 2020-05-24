@@ -6,7 +6,7 @@
   "dependencies": {
     "@types/date-fns": "^2.6.0",
     "axios": "^0.19.2",
-    "date-fns": "^2.13.0",
+    "date-fns": "^2.14.0",
     "materialize-css": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

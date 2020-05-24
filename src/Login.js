@@ -42,7 +42,7 @@ class Login extends Component{
 				 console.log(e.response.status);
 				 console.log(e.response.data);
 
-					this.setState({msg: e.response.data});
+				this.setState({msg: e.response.data});
 			
 			});
     }
