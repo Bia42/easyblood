@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import App from './App';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import * as serviceWorker from './serviceWorker';
+import './css/bootstrap.min.css'
+import './css/agency.min.css'
+
 import Login from './Login';
 import CadastroDoador from './CadastroDoador';
 import CadastroColetor from './CadastroColetor';
@@ -14,31 +16,23 @@ import ComunicacaoHemocentro from './ComunicacaoHemocentro';
 import CadastroRequisitos from './CadastroRequisitos';
 import VerificarNiveis from './VerificarNiveis';
 
+ReactDOM.render(/*<App />*/
+    (<BrowserRouter>  
+        <Switch>
+            <Route exact path="/" component={App}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/cadastroDoador" component={CadastroDoador}/>
+            <Route path="/cadastroColetor" component={CadastroColetor}/>
+            <Route path="/gerenciarColetores" component={GerenciarColetores}/>
+            <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
+            <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
+            <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
+            <Route path="/verificarNiveis" component={VerificarNiveis}/>
+        </Switch>
+    </BrowserRouter>)
+    , document.getElementById('root'));
 
-
-
-ReactDOM.render(
-(<BrowserRouter>  
-    <Switch>
-        <Route exact path="/" component={App}/>
-        <Route path="/login" component={Login}/>
-        <Route path="/cadastroDoador" component={CadastroDoador}/>
-        <Route path="/cadastroColetor" component={CadastroColetor}/>
-        <Route path="/gerenciarColetores" component={GerenciarColetores}/>
-        <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
-        <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
-        <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
-        <Route path="/verificarNiveis" component={VerificarNiveis}/>
-
-
-        
-
-
-    </Switch>
-</BrowserRouter>)
-    , 
-
-document.getElementById('root')
-
-);
-
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
