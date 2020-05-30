@@ -7,7 +7,10 @@
     "@types/date-fns": "^2.6.0",
     "axios": "^0.19.2",
     "date-fns": "^2.14.0",
+<<<<<<< HEAD
     "image-to-base64": "^2.1.0",
+=======
+>>>>>>> b4d98c7b94a69b7e2ab97f92143eb7cf44bf9209
     "materialize-css": "^1.0.0",
     "react": "^16.13.1",
     "react-agenda": "0.0.8",
