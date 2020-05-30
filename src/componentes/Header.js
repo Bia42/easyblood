@@ -25,7 +25,7 @@ export default class Header extends Component{
                         {
                             utils.novoRequestInfo("") == null ?
                                 (   
-                                    <li className="pure-menu-item"><Link to="/login" className="pure-menu-link">Login</Link></li>
+                                    <li className="pure-menu-item"><Link to="/login" className="pure-menu-link">Entrar</Link></li>
                                 ) :
                                 (
                                     <React.Fragment>
@@ -35,7 +35,7 @@ export default class Header extends Component{
                                     <li className="pure-menu-item"><Link to="/alterarDadosDoador" className="pure-menu-link">Alterar dados do Doador</Link></li>
                                     <li className="pure-menu-item"><Link to="/gerenciarColetores" className="pure-menu-link">Gerenciar coletores</Link></li>
                                     <li className="pure-menu-item"><Link to="/cadastroRequisitos" className="pure-menu-link">Cadastro de Requisitos</Link></li> */}
-                                    <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Logout</Link></li>
+                                    <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Sair</Link></li>
                                     </React.Fragment>
                                 )
                         }

@@ -73,7 +73,6 @@ class Login extends Component{
 		
     }
 
-
   render(){
    return (   
     <div> 

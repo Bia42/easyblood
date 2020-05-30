@@ -29,7 +29,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
             <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
             <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
-            <Route path="/verificarNiveis" component={VerificarNiveis}/>
+            <Route path="/verificarNiveis" component={VerificarNiveis}/>            
         </Switch>
     </BrowserRouter>)
     , document.getElementById('root'));
