@@ -9,6 +9,7 @@ import './css/agency.min.css'
 
 import Login from './Login';
 import CadastroDoador from './CadastroDoador';
+import CadastroPatrocinador from './CadastroPatrocinador';
 import CadastroColetor from './CadastroColetor';
 import GerenciarColetores from './GerenciarColetores';
 import AlterarDadosDoador from './AlterarDadosDoador';
@@ -21,6 +22,7 @@ ReactDOM.render(/*<App />*/
         <Switch>
             <Route exact path="/" component={App}/>
             <Route path="/login" component={Login}/>
+            <Route path="/cadastroPatrocinador" component={CadastroPatrocinador}/>
             <Route path="/cadastroDoador" component={CadastroDoador}/>
             <Route path="/cadastroColetor" component={CadastroColetor}/>
             <Route path="/gerenciarColetores" component={GerenciarColetores}/>

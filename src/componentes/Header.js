@@ -21,11 +21,14 @@ export default class Header extends Component{
                       {
                           utils.novoRequestInfo("") == null ?
                               (
+                                <React.Fragment>
                                   <li className="pure-menu-item"><Link to="/login" className="pure-menu-link">Login</Link></li>
+                                  <li className="pure-menu-item"><Link to="/cadastroPatrocinador" className="pure-menu-link">Cadastro de Patrocinador</Link></li>
+                                  </React.Fragment>
                               ) :
                               (
                                   <React.Fragment>
-                                  {/*<li className="pure-menu-item"><Link to="/cadastroDoador" className="pure-menu-link">Cadastro de doador</Link></li>*/}
+                    
                                   <li className="pure-menu-item"><Link to="/verificarNiveis" className="pure-menu-link">Verificar Niveis</Link></li>
                                   <li className="pure-menu-item"><Link to="/comunicacaoHemocentros" className="pure-menu-link">Comunicação entre Hemocentros</Link></li>
                                   <li className="pure-menu-item"><Link to="/alterarDadosDoador" className="pure-menu-link">Alterar dados do Doador</Link></li>
