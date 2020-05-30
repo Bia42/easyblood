@@ -16,6 +16,7 @@ import AlterarDadosDoador from './AlterarDadosDoador';
 import ComunicacaoHemocentro from './ComunicacaoHemocentro';
 import CadastroRequisitos from './CadastroRequisitos';
 import VerificarNiveis from './VerificarNiveis';
+import GerarCupons from './GerarCupons';
 
 ReactDOM.render(/*<App />*/
     (<BrowserRouter>  
@@ -23,6 +24,7 @@ ReactDOM.render(/*<App />*/
             <Route exact path="/" component={App}/>
             <Route path="/login" component={Login}/>
             <Route path="/cadastroPatrocinador" component={CadastroPatrocinador}/>
+            <Route path="/gerarCupons" component={GerarCupons}/>
             <Route path="/cadastroDoador" component={CadastroDoador}/>
             <Route path="/cadastroColetor" component={CadastroColetor}/>
             <Route path="/gerenciarColetores" component={GerenciarColetores}/>
