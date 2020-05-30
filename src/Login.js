@@ -15,8 +15,16 @@ class Login extends Component{
 
 	constructor(){
         super()
-        this.state = {msg:''}
+		this.state = {msg:'', selectTipo: ''}
+		
+		this.handleTipo = this.handleTipo.bind(this);
+
 	}
+
+	handleTipo(e) {
+		console.log(e.target.value);
+        this.setState({ selectTipo: e.target.value });
+      }
 	
     envia(event){
 
@@ -25,26 +33,44 @@ class Login extends Component{
 			headers:{
 				Authorization:'Basic ' + new Buffer(this.username.value + ':' + this.password.value).toString('base64')
 			}
-        };
+		};
 		
-		axios.post('/rest/hemocentro/login',{
-			email: this.username.value,
-			senha: this.password.value,
-			})
-		.then(response => {
-			// console.log("response:");
-			// console.log(response);
-			localStorage.setItem('Authorization', requestInfo.headers.Authorization);
-			window.location = "/";
-			})
-			.catch(e=> {
-				// console.log("e.resp:");
-				 console.log(e.response.status);
-				 console.log(e.response.data);
-
-					this.setState({msg: e.response.data});
-			
-			});
+		if(this.state.selectTipo == 'C'){
+			axios.post('/rest/hemocentro/login',{
+				email: this.username.value,
+				senha: this.password.value,
+				})
+			.then(response => {
+				// console.log("response:");
+				// console.log(response);
+				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
+				window.location = "/";
+				})
+				.catch(e=> {
+					// console.log("e.resp:");
+					 console.log(e.response.status);
+					 console.log(e.response.data);
+					 this.setState({msg: e.response.data});
+				});
+		}else{
+			axios.post('/rest/patrocinador/login',{
+				email: this.username.value,
+				senha: this.password.value,
+				})
+			.then(response => {
+				// console.log("response:");
+				// console.log(response);
+				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
+				window.location = "/";
+				})
+				.catch(e=> {
+					// console.log("e.resp:");
+					 console.log(e.response.status);
+					 console.log(e.response.data);
+					 this.setState({msg: e.response.data});
+				});
+		}
+		
     }
 
 
@@ -62,13 +88,21 @@ class Login extends Component{
 
 						<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
-						<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-							<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
-							<span className="focus-input100"></span>
-							<span className="symbol-input100">
-								<span className="lnr lnr-envelope"></span>
-							</span>
-						</div>
+					
+					<div className="wrap-input100 validate-input m-b-16">
+							<input type="radio" id="colaborador" name="tipo" value="C" onChange={this.handleTipo}/>
+							<label for="colaborador">Colaborador</label>
+							<input type="radio" id="patrocinador" name="tipo" value="P" onChange={this.handleTipo} />
+							<label for="patrocinador">Patrocinador</label>
+                	</div>
+
+					<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
+						<span className="focus-input100"></span>
+						<span className="symbol-input100">
+							<span className="lnr lnr-envelope"></span>
+						</span>
+					</div>
 
 						<div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
 							<input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input } required/>
