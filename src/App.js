@@ -34,6 +34,7 @@ function App() {
 
   return (
   <div className="App">
+  <Header/>
     <header className="masthead">
       <div className="container">
         <div className="intro-text">
