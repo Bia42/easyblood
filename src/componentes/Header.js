@@ -21,13 +21,10 @@ export default class Header extends Component{
                     <i className="fa fa-bars"></i>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarResponsive">
-                    <ul className="navbar-nav text-uppercase ml-auto">
-                        <li className="nav-item">
-                            <a className="pure-menu-link" href="/">Home</a>
-                        </li>
+                    <ul className="navbar-nav text-uppercase ml-auto">                       
                         {
                             utils.novoRequestInfo("") == null ?
-                                (
+                                (   
                                     <li className="pure-menu-item"><Link to="/login" className="pure-menu-link">Login</Link></li>
                                 ) :
                                 (

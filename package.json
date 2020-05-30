@@ -2,15 +2,12 @@
   "name": "easyblood",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost/doemais",
+  "proxy": "https://doemais-hom.herokuapp.com",
   "dependencies": {
     "@types/date-fns": "^2.6.0",
     "axios": "^0.19.2",
     "date-fns": "^2.14.0",
-<<<<<<< HEAD
-=======
     "image-to-base64": "^2.1.0",
->>>>>>> 0d2ff4110618d79164a2667bd2017a7d4989c23e
     "materialize-css": "^1.0.0",
     "react": "^16.13.1",
     "react-agenda": "0.0.8",
