@@ -49,63 +49,61 @@ class Login extends Component{
 
 
   render(){
-   return (
-   
+   return (   
     <div> 
-	<Header/>
-	<div className="limiter">
-		<div className="container-login100">
-			<div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-				<form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
-					<span className="login100-form-title p-b-55">
-						Login
-					</span>
-
-					<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
-
-					<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
-						<span className="focus-input100"></span>
-						<span className="symbol-input100">
-							<span className="lnr lnr-envelope"></span>
+		<Header/>
+		<div className="limiter">
+			<div className="container-login100">
+				<div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+					<form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
+						<span className="login100-form-title p-b-55">
+							Login
 						</span>
-					</div>
 
-					<div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input } required/>
-						<span className="focus-input100"></span>
-						<span className="symbol-input100">
-							<span className="lnr lnr-lock"></span>
-						</span>
-					</div>
+						<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
-					{/*<div className="contact100-form-checkbox m-l-4">*/}
-					{/*	<input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>*/}
-					{/*	<label className="label-checkbox100" htmlFor = "ckb1">*/}
-					{/*		Remember me*/}
-					{/*	</label>*/}
-					{/*</div>*/}
-					
-					<div className="container-login100-form-btn p-t-25">
-						<input type="submit" className="login100-form-btn"  value = "Login"/>
-					</div>
-					<div className="text-center w-full p-t-15">
-						<span className="txt1">
-							Não está cadastrado?
-						</span>
-					</div>
-					<div className="container-login100-form-btn p-t-25">
-						<a className="txt1 hov1" href="/cadastroDoador">
-							Cadastre-se agora!
-						</a>
-					</div>
-				</form>
+						<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
+							<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
+							<span className="focus-input100"></span>
+							<span className="symbol-input100">
+								<span className="lnr lnr-envelope"></span>
+							</span>
+						</div>
+
+						<div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+							<input className="input100" type="password" name="pass" placeholder="Password" ref={(input) => this.password = input } required/>
+							<span className="focus-input100"></span>
+							<span className="symbol-input100">
+								<span className="lnr lnr-lock"></span>
+							</span>
+						</div>
+
+						{/*<div className="contact100-form-checkbox m-l-4">*/}
+						{/*	<input className="input-checkbox100" id="ckb1" type="checkbox" name="remember-me"/>*/}
+						{/*	<label className="label-checkbox100" htmlFor = "ckb1">*/}
+						{/*		Remember me*/}
+						{/*	</label>*/}
+						{/*</div>*/}
+						
+						<div className="container-login100-form-btn p-t-25">
+							<input type="submit" className="login100-form-btn"  value = "Login"/>
+						</div>
+						<div className="text-center w-full p-t-15">
+							<span className="txt1">
+								Não está cadastrado?
+							</span>
+						</div>
+						<div className="container-login100-form-btn p-t-25">
+							<a className="txt1 hov1" href="/cadastroDoador">
+								Cadastre-se agora!
+							</a>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>  
    );
   }
 }
-
 export default Login;
