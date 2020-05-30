@@ -2,6 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import Patrocinadores from './componentes/Patrocinadores.jsx'
 import './App.css';
+import Header from './componentes/Header';
 
 function App() {
   const patrocinadoresLinks = [
@@ -33,22 +34,7 @@ function App() {
 
   return (
   <div className="App">
-    <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-      <div className="container">
-        <a className="navbar-brand js-scroll-trigger" href="#page-top">DoeMais</a>
-        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i className="fa fa-bars"></i>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav text-uppercase ml-auto">
-            <li className="nav-item">
-              <a className="nav-link js-scroll-trigger" href="/login">Entrar</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>  
+    <Header/>
     <header className="masthead">
       <div className="container">
         <div className="intro-text">
