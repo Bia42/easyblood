@@ -60,7 +60,7 @@ class Login extends Component{
 			.then(response => {
 				// console.log("response:");
 				// console.log(response);
-				localStorage.setItem('Dados', responde.data.id);
+				localStorage.setItem('Dados', response.data.id);
 				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 				window.location = "/";
 				})
