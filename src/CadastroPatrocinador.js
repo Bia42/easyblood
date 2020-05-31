@@ -22,7 +22,8 @@ class CadastroPatrocinador extends Component {
         usersHemocentros: [],
         selectValueUsersHemocentros:"",
         selectcnpj:"",
-        selectedFile: null
+        selectedFile: null,
+        logo:""
         }
 
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -30,13 +31,11 @@ class CadastroPatrocinador extends Component {
         this.handleDropdownChange3 = this.handleDropdownChange3.bind(this);
         this.handleDropdownChange4 = this.handleDropdownChange4.bind(this);
 
+    
+
     }
     
-    componentDidMount(){
-        fetch('/rest/hemocentro/listHemocentros')
-        .then (response => response.json())
-        .then (listHemocentros => this.setState({usersHemocentros: listHemocentros}));
-      }
+
 
       handleDropdownChange(e) {
         this.setState({ selectValue: e.target.value });
@@ -50,13 +49,7 @@ class CadastroPatrocinador extends Component {
       handleDropdownChange4(e) {
         this.setState({ selectValueUsersHemocentros: e.target.value });
       }
-      fileSelectedHandler = event =>{
-          console.log(event.target.files[0]);
-          this.setState({
-              selectedFile:event.target.files[0]
-          })
-      }
-
+  
     envia(event){
 
 		event.preventDefault();
@@ -74,11 +67,9 @@ class CadastroPatrocinador extends Component {
             numero: this.numero.value,
             cep: this.cep.value,
             complemento: this.complemento.value,
-            logo: this.state.selectedFile
+            logo: this.state.logo
             });
         
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
 
 		axios.post('/rest/patrocinador/add',   {
         cnpj: this.cnpj.value,
@@ -92,7 +83,7 @@ class CadastroPatrocinador extends Component {
         numero: this.numero.value,
         cep: this.cep.value,
         complemento: this.complemento.value,
-        logo: fd
+        logo: this.state.logo
         })
 		.then(response => {
             console.log(response);
@@ -107,6 +98,24 @@ class CadastroPatrocinador extends Component {
     }
     
     render(){
+        
+        const getFileAndConvert = async (file) => {
+            if (file && file.type.includes('image')) {
+              const reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onload = () => {
+                //onFormDataChange(reader.result, 'base64Logo'); // aqui vc vai atualizar o seu state
+                console.log(reader.result)
+                this.setState({ logo: reader.result});
+              };
+              reader.onerror = (error) => {
+                console.log(error);
+              };
+            } else {
+              console.log('Esse tipo de arquivo não é suportado!');
+            }
+          };
+
         return (
          <div> 
          <Header/>
@@ -202,7 +211,12 @@ class CadastroPatrocinador extends Component {
         
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                             <p>Logo:</p>
-                            <input type="file" name="arquivos" class="btn"  accept="image/png, image/jpeg" onChange = {this.fileSelectedHandler} ref={(input) => this.logo = input }  multiple /> 
+                            <input
+                                    type="file"
+                                    accept=".jpeg, .tif, .jpg, .png"
+                                    className="company-register_file_input"
+                                    onInput={e => getFileAndConvert(e.target.files[0])}
+                                />
                          </div>                  
      
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
