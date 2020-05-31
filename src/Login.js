@@ -61,6 +61,8 @@ class Login extends Component{
 				// console.log("response:");
 				// console.log(response);
 				localStorage.setItem('Dados', response.data.id);
+				localStorage.setItem('Teste', response.data);
+				
 				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 				window.location = "/";
 				})
