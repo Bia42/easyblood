@@ -24,6 +24,8 @@ class GerarCupons extends Component {
       
     envia(event){
 
+      //  console.log(utils.usuarioLogado());
+
 
 		event.preventDefault();
         const requestInfo = utils.novoRequestInfo("");
@@ -81,10 +83,11 @@ class GerarCupons extends Component {
                              <input type="submit" className="login100-form-btn"  value = "Gerar"/>
                          </div>
 
+                      
                          <div className="wrap-input100 validate-input m-b-16">
                              <textarea className="input100" rows="10" cols="33" type="text" name="dadosDoExame" placeholder="Cupons Gerados"
                                        onChange={(input) => this.setState({cuponsGerados: input.target.value}) }
-                                       defaultValue={this.state.cuponsGerados}/>
+                                       defaultValue={this.state.cuponsGerados} disabled/>
                              <span className="focus-input100"></span>
                          </div>      
                      </form>

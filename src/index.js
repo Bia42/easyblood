@@ -17,6 +17,8 @@ import ComunicacaoHemocentro from './ComunicacaoHemocentro';
 import CadastroRequisitos from './CadastroRequisitos';
 import VerificarNiveis from './VerificarNiveis';
 import GerarCupons from './GerarCupons';
+import ListarCupons from './ListarCupons';
+
 
 ReactDOM.render(/*<App />*/
     (<BrowserRouter>  
@@ -31,7 +33,9 @@ ReactDOM.render(/*<App />*/
             <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
             <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
             <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
-            <Route path="/verificarNiveis" component={VerificarNiveis}/>            
+            <Route path="/verificarNiveis" component={VerificarNiveis}/>     
+            <Route path="/listarCupons" component={ListarCupons}/>            
+       
         </Switch>
     </BrowserRouter>)
     , document.getElementById('root'));
