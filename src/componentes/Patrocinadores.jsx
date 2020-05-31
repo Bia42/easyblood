@@ -12,16 +12,15 @@ export default ({ patrocinadoresLinks }) => {
           </div>
           <div className="row">
             {
-                patrocinadoresLinks && patrocinadoresLinks.map(({ title, caption }, index) => 
+                patrocinadoresLinks && patrocinadoresLinks.map(({ razaoSocial, logo }, index) => 
                     <div className="col-md-4 col-sm-6 patrocinadores-item">
                         <a className="patrocinadores-link" data-toggle="modal" href="#patrocinadoresModal1">
                             <div className="patrocinadores-hover">
                             </div>
-                            <img className="img-fluid" src={ `https://unsplash.it/350/140/?${Math.floor(Math.random(0,100) * 100)}` } alt="patrocinadores_img" />
+                            {/*<img className="img-fluid" src={ `https://unsplash.it/350/140/?${Math.floor(Math.random(0,100) * 100)}` } alt="patrocinadores_img" />*/}
                         </a>
                         <div className="patrocinadores-caption">
-                            <h4>{ title }</h4>
-                            <p className="text-muted">{ caption }</p>
+                            <h4>{ razaoSocial }</h4>
                         </div>
                     </div>
                 )

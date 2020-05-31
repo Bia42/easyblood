@@ -1,38 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 // import logo from './logo.svg';
-import Patrocinadores from './componentes/Patrocinadores.jsx'
+import {CardList} from './componentes/patrocinadores-list.component.jsx'
 import './App.css';
 import Header from './componentes/Header';
 
-function App() {
-  const patrocinadoresLinks = [
-    {
-      title: 'Threads',
-      caption: 'Illustration'
-    },
-    {
-      title: 'Explore',
-      caption: 'Graphic Design'
-    },
-    {
-      title: 'Finish',
-      caption: 'Identity'
-    },
-    {
-      title: 'Lines',
-      caption: 'Branding'
-    },
-    {
-      title: 'Southwest',
-      caption: 'Website Design'
-    },
-    {
-      title: 'Window',
-      caption: 'Photography'
-    }
-  ]
+class App extends Component {
+  constructor(){
+      super();
 
-  return (
+      this.state = {
+        patrocinadores:[]
+      };
+  }
+  
+  componentDidMount(){
+      fetch('/rest/patrocinador/listPatrocinadores')
+      .then (response => response.json())
+      .then (users => this.setState({patrocinadores: users}));
+    }
+
+render() {  
+  return ( 
   <div className="App">
   <Header/>
     <header className="masthead">
@@ -57,7 +45,7 @@ function App() {
           <div className="col-md-4">
             <span className="fa-stack fa-4x">
               <i className="fa fa-circle fa-stack-2x text-primary"></i>
-              <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+              <i className="fa fa-calendar fa-stack-1x fa-inverse"></i>
             </span>
             <h4 className="service-heading">Agenda</h4>
             <p className="text-muted">Tenha o controle de sua agenda, verifique os atendimentos marcados e disponibilize horários para atendimento.</p>
@@ -65,15 +53,15 @@ function App() {
           <div className="col-md-4">
             <span className="fa-stack fa-4x">
               <i className="fa fa-circle fa-stack-2x text-primary"></i>
-              <i className="fa fa-laptop fa-stack-1x fa-inverse"></i>
+              <i className="fa fa-ticket fa-stack-1x fa-inverse"></i>
             </span>
-            <h4 className="service-heading">Relatórios</h4>
-            <p className="text-muted">Gere relatórios mensais para verificar o andamento do hemocentro, quantidade de doadores que passaram pelo hemocentro e o estoque de sangue.</p>
+            <h4 className="service-heading">Cupons</h4>
+            <p className="text-muted">Gere cupons e disponibilize para uso de doadores, assim contribuindo com a fidelização com o hemocentro.</p>
           </div>
           <div className="col-md-4">
             <span className="fa-stack fa-4x">
               <i className="fa fa-circle fa-stack-2x text-primary"></i>
-              <i className="fa fa-lock fa-stack-1x fa-inverse"></i>
+              <i className="fa fa-laptop fa-stack-1x fa-inverse"></i>
             </span>
             <h4 className="service-heading">Campanhas</h4>
             <p className="text-muted">Cadastre campanhas de doação de sangue de uma forma fácil, alcançando mais pessoas e contribuindo com o estoque de sangue em períodos críticos.</p>
@@ -82,7 +70,7 @@ function App() {
       </div>
     </section>
 
-    <Patrocinadores patrocinadoresLinks={patrocinadoresLinks}></Patrocinadores>
+    <CardList patrocinadores={this.state.patrocinadores}/>
     
     <section className="page-section" id="about">
       <div className="container">
@@ -190,7 +178,7 @@ function App() {
                 </li>
                 <li className="list-inline-item">
                   <a href="#something">
-                    <i className="fa fa-linkedin-in"></i>
+                    <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>
@@ -214,7 +202,7 @@ function App() {
                 </li>
                 <li className="list-inline-item">
                   <a href="#something">
-                    <i className="fa fa-linkedin-in"></i>
+                    <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>
@@ -238,7 +226,7 @@ function App() {
                 </li>
                 <li className="list-inline-item">
                   <a href="#something">
-                    <i className="fa fa-linkedin-in"></i>
+                    <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>
@@ -262,7 +250,7 @@ function App() {
                 </li>
                 <li className="list-inline-item">
                   <a href="#something">
-                    <i className="fa fa-linkedin-in"></i>
+                    <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>
@@ -322,7 +310,7 @@ function App() {
               </li>
               <li className="list-inline-item">
                 <a href="#something">
-                  <i className="fa fa-linkedin-in"></i>
+                  <i className="fa fa-linkedin"></i>
                 </a>
               </li>
             </ul>
@@ -342,6 +330,7 @@ function App() {
     </footer>
   </div>
   );
+}
 }
 
 export default App;
