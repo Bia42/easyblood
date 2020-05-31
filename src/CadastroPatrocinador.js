@@ -126,7 +126,6 @@ class CadastroPatrocinador extends Component {
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
 
-                         <img src={logo} alt="Logo" />
                          <span className="login100-form-title p-b-55">
                              Cadastro de Patrocinador
                          </span>                         
