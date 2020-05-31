@@ -9,6 +9,7 @@
     "date-fns": "^2.14.0",
     "image-to-base64": "^2.1.0",
     "materialize-css": "^1.0.0",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-agenda": "0.0.8",
     "react-dom": "^16.13.1",

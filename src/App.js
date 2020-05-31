@@ -38,6 +38,7 @@ function App() {
     <header className="masthead">
       <div className="container">
         <div className="intro-text">
+          <img src="../logo_simb.fw.png" className="logo_simb"/>
           <div className="intro-lead-in">Bem Vindo ao DoeMais!</div>
           <div className="intro-heading text-uppercase">Venha fazer a diferença</div>
           <a className="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Serviços do Projeto</a>

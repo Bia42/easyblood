@@ -70,20 +70,23 @@ class GerarCupons extends Component {
                              <input className="input100" type="text" name="descricao" placeholder="Descrição"
                                     ref={(input) => this.descricao = input} required/>
                              <span className="focus-input100"></span>
+                            <span className="symbol-input100">
+                                <span className="lnr lnr-text-align-justify"></span>
+						    </span>
                          </div>
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                              <input className="input100" type="text" name="quant" placeholder="Quantidade"
                                     ref={(input) => this.quant = input } required/>
                              <span className="focus-input100"></span>
-                         </div>
-                       
-                  
+                            <span className="symbol-input100">
+                                <span className="lnr lnr-question-circle"></span>
+						    </span>
+                         </div>                  
                          
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Gerar"/>
                          </div>
-
-                      
+                         
                          <div className="wrap-input100 validate-input m-b-16">
                              <textarea className="input100" rows="10" cols="33" type="text" name="dadosDoExame" placeholder="Cupons Gerados"
                                        onChange={(input) => this.setState({cuponsGerados: input.target.value}) }

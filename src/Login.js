@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 
 import './css/main.css';
 import './css/util.css';
+import './css/radiostrap.scss';
 import './css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
 import './css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
 import './css/vendor/animate/animate.css';
@@ -91,13 +92,12 @@ class Login extends Component{
 
 						<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
-					
-					<div className="wrap-input100 validate-input m-b-16">
-							<input type="radio" id="colaborador" name="tipo" value="C" onChange={this.handleTipo}/>
-							<label for="colaborador">Colaborador</label>
-							<input type="radio" id="patrocinador" name="tipo" value="P" onChange={this.handleTipo} />
-							<label for="patrocinador">Patrocinador</label>
-                	</div>
+					<div class="toggle">
+						<input type="radio" name="tipo" id="colaborador" checked="checked" value="C" onChange={this.handleTipo}/>
+						<label for="colaborador">Colaborador</label>
+						<input type="radio" name="tipo"  id="patrocinador" checked="checked" value="P" onChange={this.handleTipo}/>
+						<label for="patrocinador">Patrocinador</label>
+					</div>	
 
 					<div className="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
 						<input className="input100" type="text" name="email" placeholder="Email" ref={(input) => this.username = input } required/>
@@ -132,9 +132,13 @@ class Login extends Component{
 						</div>
 						<div className="container-login100-form-btn p-t-25">
 							<a className="txt1 hov1" href="/cadastroDoador">
-								Cadastre-se agora!
+								Cadastre-se Colaborador!
+							</a>
+							<a className="txt1 hov1" href="/cadastroPatrocinador">
+								Cadastre-se Patrocinador!
 							</a>
 						</div>
+						
 					</form>
 				</div>
 			</div>
