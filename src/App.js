@@ -162,7 +162,7 @@ render() {
         <div className="row">
           <div className="col-sm-4">
             <div className="team-member">
-              <img className="mx-auto rounded-circle" src="img/team/1.jpg" alt=""/>
+              <img src="../1.jpeg" className="mx-auto rounded-circle"/>
               <h4>Jansley Barbosa</h4>
               <p className="text-muted">Desenvolvedor Mobile</p>
               <ul className="list-inline social-buttons">
@@ -186,7 +186,7 @@ render() {
           </div>
           <div className="col-sm-4">
             <div className="team-member">
-              <img className="mx-auto rounded-circle" src="img/team/2.jpg" alt=""/>
+              <img className="mx-auto rounded-circle" src="../2.jpg" alt=""/>
               <h4>Lucas Oliveira</h4>
               <p className="text-muted">Desenvolvedor Web</p>
               <ul className="list-inline social-buttons">
@@ -210,7 +210,7 @@ render() {
           </div>
           <div className="col-sm-4">
             <div className="team-member">
-              <img className="mx-auto rounded-circle" src="img/team/2.jpg" alt=""/>
+              <img className="mx-auto rounded-circle" src="../3.jpeg" alt=""/>
               <h4>Marcus Pinheiro</h4>
               <p className="text-muted">Desenvolvedor Mobile</p>
               <ul className="list-inline social-buttons">
@@ -234,7 +234,7 @@ render() {
           </div>
           <div className="col-sm-4">
             <div className="team-member">
-              <img className="mx-auto rounded-circle" src="img/team/3.jpg" alt=""/>
+              <img className="mx-auto rounded-circle" src="../4.jpeg" alt=""/>
               <h4>Beatriz Oliveira</h4>
               <p className="text-muted">Desenvolvedor Web</p>
               <ul className="list-inline social-buttons">
