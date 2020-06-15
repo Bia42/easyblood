@@ -210,30 +210,6 @@ render() {
           </div>
           <div className="col-sm-4">
             <div className="team-member">
-              <img className="mx-auto rounded-circle" src="../3.jpeg" alt=""/>
-              <h4>Marcus Pinheiro</h4>
-              <p className="text-muted">Desenvolvedor Mobile</p>
-              <ul className="list-inline social-buttons">
-                <li className="list-inline-item">
-                  <a href="#something">
-                    <i className="fa fa-twitter"></i>
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="#something">
-                    <i className="fa fa-facebook-f"></i>
-                  </a>
-                </li>
-                <li className="list-inline-item">
-                  <a href="#something">
-                    <i className="fa fa-linkedin"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="team-member">
               <img className="mx-auto rounded-circle" src="../4.jpeg" alt=""/>
               <h4>Beatriz Oliveira</h4>
               <p className="text-muted">Desenvolvedor Web</p>
@@ -255,7 +231,30 @@ render() {
                 </li>
               </ul>
             </div>
+          </div><div className="col-sm-4">
+          <div className="team-member">
+            <img className="mx-auto rounded-circle" src="../3.jpeg" alt=""/>
+            <h4>Marcus Pinheiro</h4>
+            <p className="text-muted">Desenvolvedor Mobile</p>
+            <ul className="list-inline social-buttons">
+              <li className="list-inline-item">
+                <a href="#something">
+                  <i className="fa fa-twitter"></i>
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#something">
+                  <i className="fa fa-facebook-f"></i>
+                </a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#something">
+                  <i className="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
           </div>
+        </div>        
         </div>
         <div className="row">
           <div className="col-lg-8 mx-auto text-center">
