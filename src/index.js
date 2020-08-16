@@ -34,7 +34,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
             <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
             <Route path="/verificarNiveis" component={VerificarNiveis}/>     
-            <Route path="/listarCupons" component={ListarCupons}/>            
+            <Route path="/listarCupons" component={ListarCupons}/>    
        
         </Switch>
     </BrowserRouter>)

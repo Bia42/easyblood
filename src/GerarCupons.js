@@ -18,9 +18,7 @@ class GerarCupons extends Component {
             cuponsGerados: [],
         };
 
-	}
-
-    
+	}    
       
     envia(event){
 
