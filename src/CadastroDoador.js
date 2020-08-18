@@ -243,7 +243,7 @@ class CadastroDoador extends Component {
                             <select id="dropdownHemocentros" onChange={this.handleDropdownChange4} required>
                                 <option value="">Selecione uma opção</option>    
                                 {this.state.usersHemocentros.map(usersHemocentros =>(
-                                    <option key={usersHemocentros.id} value = {usersHemocentros.id}>{usersHemocentros.razaoSocial}</option>
+                                    <option key={usersHemocentros.hemocentroId} value = {usersHemocentros.hemocentroId}>{usersHemocentros.razaoSocial}</option>
                                 ))}
                             </select>
                         </div>
