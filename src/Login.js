@@ -93,9 +93,9 @@ class Login extends Component{
 						<span className="text-center p-b-55 mensagem-erro">{this.state.msg}</span>
 
 					<div class="toggle">
-						<input type="radio" name="tipo" id="colaborador" checked="checked" value="C" onChange={this.handleTipo}/>
+						<input type="radio" name="tipo" id="colaborador" value="C" onChange={this.handleTipo}/>
 						<label for="colaborador">Colaborador</label>
-						<input type="radio" name="tipo"  id="patrocinador" checked="checked" value="P" onChange={this.handleTipo}/>
+						<input type="radio" name="tipo"  id="patrocinador" value="P" onChange={this.handleTipo}/>
 						<label for="patrocinador">Patrocinador</label>
 					</div>	
 

@@ -41,9 +41,9 @@ export default class Header extends Component{
                                     </React.Fragment>
                                     ):
                                     (   
-                                        <React.Fragment>
-                                        <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Logout</Link></li>
-                                        <li className="pure-menu-item"><Link to="/alterarDadosDoador" className="pure-menu-link">Buscar Histórico do Doador</Link></li>
+                                        <React.Fragment>                                        
+                                        <li className="pure-menu-item"><Link to="/alterarDadosDoador" className="pure-menu-link">Histórico do Doador</Link></li>
+                                        <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Sair</Link></li>
                                         </React.Fragment>
                                     )
                                 )
