@@ -215,7 +215,7 @@ header.masthead .intro-text .intro-heading {
 
 @media (min-width:768px) {
 	header.masthead .intro-text {
-		padding-top: 100px;
+		padding-top: 220px;
 		padding-bottom: 200px
 	}
 	header.masthead .intro-text .logo_simb {
@@ -584,8 +584,8 @@ header.masthead .intro-text .intro-heading {
 }
 
 .team-member img {
-	width: 225px;
-	height: 225px;
+	width: 200px;
+	height: 200px;
 	border: 7px solid rgba(0, 0, 0, .1)
 }
 
