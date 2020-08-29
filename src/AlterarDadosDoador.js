@@ -7,7 +7,8 @@ import './css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css';
 import './css/vendor/animate/animate.css';
 import axios from 'axios';
 import Header from './componentes/Header';
-import * as utils from "./utils/utils";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
 
 class AlterarDadosDoador extends Component {
     constructor(props){
@@ -16,7 +17,8 @@ class AlterarDadosDoador extends Component {
             doadorBusca: {}
         };
         this.procurarCpf = this.procurarCpf.bind(this);
-	}
+    }
+    
     procurarCpf(e) {
         axios.post('/rest/doador/historico',{
             cpf:  this.cpf.value,
@@ -32,8 +34,9 @@ class AlterarDadosDoador extends Component {
                 console.log(e.response.data.cupom);
         });
     }
+
     render(){
-        return (        
+        return (                   
          <div> 
          <Header/>
          <div className="limiter">
@@ -88,6 +91,8 @@ class AlterarDadosDoador extends Component {
                              </span>
                              <span className="focus-input100"></span>                             
                          </div>
+
+                         <App />
                      </form>
                  </div>
              </div>
@@ -98,3 +103,42 @@ class AlterarDadosDoador extends Component {
 }
 
 export default AlterarDadosDoador;
+
+function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Jansley
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <p>teste</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
+  function App() {
+    const [modalShow, setModalShow] = React.useState(false);
+    return (
+      <>
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Ver Histórico
+        </Button>
+  
+        <MyVerticallyCenteredModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+        />
+      </>
+    );
+  }
