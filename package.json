@@ -2,7 +2,7 @@
   "name": "easyblood",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://doemais-hom.herokuapp.com",
+  "proxy": "https://doemais-prd.herokuapp.com",
   "dependencies": {
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@types/date-fns": "^2.6.0",
@@ -32,6 +32,7 @@
     "react-scripts": "3.2.0",
     "react-select": "^3.1.0",
     "reactstrap": "^8.5.1",
+    "universal-cookie": "^4.0.3",
     "utf-8": "^2.0.0"
   },
   "scripts": {

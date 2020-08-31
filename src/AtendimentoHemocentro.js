@@ -16,9 +16,13 @@ class AtendimentoHemocentro extends Component {
         this.state = {msg:''
         };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        this.handleDropdownChange2 = this.handleDropdownChange2.bind(this);
     }
     handleDropdownChange(e) {
         this.setState({ selectDia: e.target.value });
+      }
+    handleDropdownChange2(e) {
+        this.setState({ selectDiaFinal: e.target.value });
       }
     envia(event){
 
@@ -26,8 +30,13 @@ class AtendimentoHemocentro extends Component {
         const requestInfo = utils.novoRequestInfo("")
 
         console.log({
-            hemocentro_id: localStorage.getItem("Dados"),
+            hemocentro_id: utils.getCookie(),
+            periodo_inicio: this.periodo_inicio.value,
+            periodo_final: this.periodo_final.value,
             dia: this.state.selectDia,
+            diaFinal: this.state.selectDiaFinal,
+            quantidade: this.quantidade.value,
+            tempo: this.tempo.value,
             hora_inicio: this.hora_inicio.value,
             hora_final: this.hora_final.value
             });            
@@ -46,8 +55,21 @@ class AtendimentoHemocentro extends Component {
 
                          <span>{this.state.msg}</span>
 
-                         <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-                         <Form.Label>Selecione o dia disponível</Form.Label>
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Período Inicial</p>
+                             <input className="input100" type="month" name="perio" maxLength="5" placeholder="Período Inicial" ref={(input) => this.periodo_inicio = input }/>
+                             <span className="focus-input100"/>
+                         
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Período Final</p>
+                             <input className="input100" type="month" name="periofo" maxLength="5" placeholder="Período Final" ref={(input) => this.periodo_final = input }/>
+                             <span className="focus-input100"/>
+                        </div>
+
+                        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+                         <Form.Label>Selecione o dia inicial</Form.Label>
                          <Form.Control as="select" size="sm" custom onChange={this.handleDropdownChange}>
                            <option value = "1">Domingo</option>
                            <option value = "2">Segunda</option>
@@ -59,11 +81,36 @@ class AtendimentoHemocentro extends Component {
                          </Form.Control>
                        </Form.Group>
 
+                       <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+                         <Form.Label>Selecione o dia final</Form.Label>
+                         <Form.Control as="select" size="sm" custom onChange={this.handleDropdownChange2}>
+                           <option value = "1">Domingo</option>
+                           <option value = "2">Segunda</option>
+                           <option value = "3">Terça</option>
+                           <option value = "4">Quarta</option>
+                           <option value = "5">Quinta</option>
+                           <option value = "6">Sexta</option>
+                           <option value = "7">Sábado</option>
+                         </Form.Control>
+                       </Form.Group>
+
+                       <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Quantidade de doadores por atendimento:</p>
+                             <input className="input100" type="number" name="quantidade" maxLength="5" placeholder="Quantidade" ref={(input) => this.quantidade = input }/>
+                             <span className="focus-input100"/>
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Tempo de doação em minutos:</p>
+                             <input className="input100" type="number" name="tempo" maxLength="5" placeholder="Tempo em minutos" ref={(input) => this.tempo = input }/>
+                             <span className="focus-input100"/>
+                        </div>
+
                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                             <p>Horário de Entrada:</p>
                              <input className="input100" type="time" name="inicial" maxLength="5" placeholder="Hora Inicial" ref={(input) => this.hora_inicio = input }/>
                              <span className="focus-input100"/>
-                         </div>
+                        </div>
 
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                          <p>Horário de Saída:</p>

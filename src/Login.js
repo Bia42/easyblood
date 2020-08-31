@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-
-
 import './css/main.css';
 import './css/util.css';
 import './css/radiostrap.scss';
@@ -16,8 +14,7 @@ class Login extends Component{
 
 	constructor(){
         super()
-		this.state = {msg:'', selectTipo: ''}
-		
+		this.state = {msg:'', selectTipo: ''}		
 		this.handleTipo = this.handleTipo.bind(this);
 
 	}
@@ -43,7 +40,10 @@ class Login extends Component{
 				})
 			.then(response => {
 				// console.log("response:");
-				// console.log(response);
+				//console.log(response);
+				//console.log(response.data.hemocentroId);
+				utils.setCookie(response.data.hemocentroId);
+				//console.log(utils.getCookie());
 				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 				window.location = "/";
 				})
@@ -73,10 +73,8 @@ class Login extends Component{
 					 console.log(e.response.data);
 					 this.setState({msg: e.response.data});
 				});
-		}
-		
+		}		
     }
-
 
   render(){
    return (   
