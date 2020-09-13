@@ -59,50 +59,11 @@ class AtendimentoHemocentro extends Component {
                             <p>Período Inicial</p>
                              <input className="input100" type="month" name="perio" maxLength="5" placeholder="Período Inicial" ref={(input) => this.periodo_inicio = input }/>
                              <span className="focus-input100"/>
-                         
                         </div>
 
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
                             <p>Período Final</p>
                              <input className="input100" type="month" name="periofo" maxLength="5" placeholder="Período Final" ref={(input) => this.periodo_final = input }/>
-                             <span className="focus-input100"/>
-                        </div>
-
-                        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-                         <Form.Label>Selecione o dia inicial</Form.Label>
-                         <Form.Control as="select" size="sm" custom onChange={this.handleDropdownChange}>
-                           <option value = "1">Domingo</option>
-                           <option value = "2">Segunda</option>
-                           <option value = "3">Terça</option>
-                           <option value = "4">Quarta</option>
-                           <option value = "5">Quinta</option>
-                           <option value = "6">Sexta</option>
-                           <option value = "7">Sábado</option>
-                         </Form.Control>
-                       </Form.Group>
-
-                       <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-                         <Form.Label>Selecione o dia final</Form.Label>
-                         <Form.Control as="select" size="sm" custom onChange={this.handleDropdownChange2}>
-                           <option value = "1">Domingo</option>
-                           <option value = "2">Segunda</option>
-                           <option value = "3">Terça</option>
-                           <option value = "4">Quarta</option>
-                           <option value = "5">Quinta</option>
-                           <option value = "6">Sexta</option>
-                           <option value = "7">Sábado</option>
-                         </Form.Control>
-                       </Form.Group>
-
-                       <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                            <p>Quantidade de doadores por atendimento:</p>
-                             <input className="input100" type="number" name="quantidade" maxLength="5" placeholder="Quantidade" ref={(input) => this.quantidade = input }/>
-                             <span className="focus-input100"/>
-                        </div>
-
-                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                            <p>Tempo de doação em minutos:</p>
-                             <input className="input100" type="number" name="tempo" maxLength="5" placeholder="Tempo em minutos" ref={(input) => this.tempo = input }/>
                              <span className="focus-input100"/>
                         </div>
 
@@ -118,10 +79,21 @@ class AtendimentoHemocentro extends Component {
                              <span className="focus-input100"/>
                          </div>
 
+                       <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Quantidade de doadores por atendimento:</p>
+                             <input className="input100" type="number" name="quantidade" maxLength="5" placeholder="Quantidade" ref={(input) => this.quantidade = input }/>
+                             <span className="focus-input100"/>
+                        </div>
+
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                            <p>Tempo de doação em minutos:</p>
+                             <input className="input100" type="number" name="tempo" maxLength="5" placeholder="Tempo em minutos" ref={(input) => this.tempo = input }/>
+                             <span className="focus-input100"/>
+                        </div>
+
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value="Cadastrar"/>
                          </div>
-
                      </form>
                  </div>
              </div>
