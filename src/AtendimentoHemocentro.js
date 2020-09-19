@@ -30,16 +30,32 @@ class AtendimentoHemocentro extends Component {
         const requestInfo = utils.novoRequestInfo("")
 
         console.log({
-            hemocentro_id: utils.getCookie(),
+            hemocentroId: utils.getCookie(),
             periodo_inicio: this.periodo_inicio.value,
             periodo_final: this.periodo_final.value,
             dia: this.state.selectDia,
             diaFinal: this.state.selectDiaFinal,
             quantidade: this.quantidade.value,
             tempo: this.tempo.value,
-            hora_inicio: this.hora_inicio.value,
-            hora_final: this.hora_final.value
-            });            
+            horaInicio: this.hora_inicio.value,
+            horaFinal: this.hora_final.value
+            });   
+            
+            axios.post('/rest//hemocentro/addAgenda',   {
+                hemocentroId: utils.getCookie(),
+                horaFinal:  this.hora_final.value,
+                horaInicio: this.hora_inicio.value,
+                periodoFinal: this.periodo_final.value,
+                periodoInicio: this.periodo_inicio.value,
+                quantidade: this.quantidade.value,
+                tempo: this.tempo.value
+                })
+                .then(response => {
+                    console.log(response);
+                    }).catch(error=> {
+                        this.setState({msg: error.response.data});
+                        console.log(error);
+                    });
     }
     render(){
         return (        

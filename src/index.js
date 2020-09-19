@@ -19,6 +19,7 @@ import VerificarNiveis from './VerificarNiveis';
 import GerarCupons from './GerarCupons';
 import ListarCupons from './ListarCupons';
 import AtendimentoHemocentro from './AtendimentoHemocentro';
+import Agenda from './agenda/main.jsx';
 
 
 ReactDOM.render(/*<App />*/
@@ -37,6 +38,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/verificarNiveis" component={VerificarNiveis}/>     
             <Route path="/listarCupons" component={ListarCupons}/>    
             <Route path="/atendimentoHemocentro" component={AtendimentoHemocentro}/>   
+            <Route path="/agenda" component={Agenda}/>
         </Switch>
     </BrowserRouter>)
     , document.getElementById('root'));
