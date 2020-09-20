@@ -2,8 +2,10 @@
   "name": "easyblood",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://doemais-hom.herokuapp.com",
+  "proxy": "https://doemais-prd.herokuapp.com",
   "dependencies": {
+    "@fullcalendar/daygrid": "^5.3.2",
+    "@fullcalendar/react": "^5.3.1",
     "@types/date-fns": "^2.6.0",
     "antd": "^4.5.4",
     "axios": "^0.19.2",
