@@ -1,4 +1,7 @@
-export const URL_BASE = "https://doemais-hom.herokuapp.com";
+import Cookies from 'universal-cookie';
+
+export const URL_BASE = "https://doemais-prd.herokuapp.com";
+export const cookies = new Cookies();
 
 export function novoRequestInfo(body) {
     let auth = localStorage.getItem("Authorization");
@@ -75,10 +78,16 @@ export function validaTelefone(strTel) {
     else return false;
 }
 
-
 export function logout() {
     localStorage.removeItem("Authorization");
     localStorage.removeItem("Dados");
 
 }
 
+export function setCookie(userLogado) {
+  cookies.set('userLogado', userLogado, { path: '/' });
+}
+
+export function getCookie() {
+  return cookies.get('userLogado');
+}

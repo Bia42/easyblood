@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './css/main.css';
 import './css/util.css';
 import './css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -16,7 +17,8 @@ class AlterarDadosDoador extends Component {
             doadorBusca: {}
         };
         this.procurarCpf = this.procurarCpf.bind(this);
-	}
+    }
+    
     procurarCpf(e) {
         axios.post('/rest/doador/historico',{
             cpf:  this.cpf.value,
@@ -32,8 +34,9 @@ class AlterarDadosDoador extends Component {
                 console.log(e.response.data.cupom);
         });
     }
+
     render(){
-        return (        
+        return (                   
          <div> 
          <Header/>
          <div className="limiter">
@@ -80,14 +83,10 @@ class AlterarDadosDoador extends Component {
                                 <span className="lnr lnr-drop"></span>
                              </span>
                          </div>
-
-                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <textarea className="input100" type="text" name="historico" placeholder="Histórico" id="exampleFormControlTextarea1" defaultValue={this.state.doadorBusca.historico || ""} rows="3" readOnly/>
-                             <span className="symbol-input100">
-                                <span className="lnr lnr-menu"></span>
-                             </span>
-                             <span className="focus-input100"></span>                             
-                         </div>
+                        <App
+                            nome = {this.state.doadorBusca.nome}
+                            historico = {this.state.doadorBusca.historico || ""}
+                        />
                      </form>
                  </div>
              </div>
@@ -98,3 +97,47 @@ class AlterarDadosDoador extends Component {
 }
 
 export default AlterarDadosDoador;
+
+function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Histórico
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>{props.nome}</h4>
+          <p>
+             {props.historico}
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Fechar</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+  
+function App(props) {
+    const [modalShow, setModalShow] = React.useState(false); 
+    return (
+        <>
+        <Button className='botaoModal' variant="primary" onClick={() => setModalShow(true)}>
+            Histórico
+        </Button>
+
+        <MyVerticallyCenteredModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            nome={props.nome}
+            historico={props.historico}
+        />
+        </>
+    );
+}
