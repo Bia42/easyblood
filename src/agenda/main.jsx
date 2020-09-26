@@ -4,14 +4,16 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from './event-utils'
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export default class DemoApp extends React.Component {
 
   state = {
     weekendsVisible: true,
-    currentEvents: []
+    currentEvents: [],
+    show: false
   }
-
   render() {
     return (
       <div className='demo-app'>
@@ -31,7 +33,7 @@ export default class DemoApp extends React.Component {
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
             initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
+            select={this.handleModal}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
@@ -41,6 +43,23 @@ export default class DemoApp extends React.Component {
             eventRemove={function(){}}
             */
           />
+          <Modal show={this.state.show} onHide={()=>{this.handleModal()}} centered size="lg" aria-labelledby="contained-modal-title-vcenter">
+            <Modal.Header closeButton>
+              <Modal.Title id="contained-modal-title-vcenter">
+                  Histórico
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                <input className="input100" type="text" name="email" placeholder="Email"/>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={()=>{this.handleModal()}}>
+                  Fechar
+              </Button>
+            </Modal.Footer>
+            </Modal>
         </div>
       </div>
     )
@@ -113,6 +132,22 @@ export default class DemoApp extends React.Component {
     })
   }
 
+  handleModal= () =>
+  {
+    this.setState({
+      show: !this.state.show
+    })
+  }
+
+}
+
+function renderSidebarEvent(event) {
+  return (
+    <li key={event.id}>
+      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', locale: 'pt'})}</b>
+      <i>{event.title}</i>
+    </li>
+  )
 }
 
 function renderEventContent(eventInfo) {
@@ -121,14 +156,5 @@ function renderEventContent(eventInfo) {
       <b>{eventInfo.timeText}</b>
       <i>{eventInfo.event.title}</i>
     </>
-  )
-}
-
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
   )
 }
