@@ -20,10 +20,21 @@ class CadastrarCampanhas extends Component {
     constructor(props){
         super(props)
         this.state = {msg:'',
-            cuponsGerados: [],
+            show: false,
+            btn_show: true,
+            loading: false
         };
 
-	}    
+  }  
+  
+  handleClick()
+  {
+      this.setState({show: !this.state.show})
+  }
+  handleClose()
+  {
+      this.setState({show: !this.state.show})
+  }
       
     envia(event){
 
@@ -42,9 +53,22 @@ class CadastrarCampanhas extends Component {
             descricao: this.descricao.value
             })
             .then(response => {
-             console.log(response.data);
-             this.setState({cuponsGerados: response.data});
-             
+               console.log(response.data);
+
+              setTimeout(() => {
+                this.handleClick()
+              }, 3000);
+              
+            this.setState({ loading: true });
+
+            setTimeout(() => {
+                this.setState({ loading: false });
+            }, 3000);     
+                setTimeout(() => {
+                this.quant.value = "";
+                this.descricao.value = "";
+             }, 3000);
+
             })
             .catch(e=> {
              // console.log("e.resp:");
@@ -57,6 +81,7 @@ class CadastrarCampanhas extends Component {
     }
     
     render(){
+        const { loading } = this.state;
 
         return (
         
@@ -65,7 +90,7 @@ class CadastrarCampanhas extends Component {
          <div className="limiter">
              <div className="container-login100">
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-                     <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
+                     <form className="login100-form validate-form">
                          <span className="login100-form-title p-b-55">
                              Cadastrar Campanhas
                          </span>
@@ -86,10 +111,23 @@ class CadastrarCampanhas extends Component {
                                 <span className="lnr lnr-question-circle"></span>
 						    </span>
                          </div>                  
-                         <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value = "Criar"/>
-                         </div>
-                        <CustomizedSnackbars/>
+
+                         <Button  className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)} >
+                            {loading && (
+                                <i
+                                className="fa fa-refresh fa-spin"
+                                style={{ marginRight: "5px" }}
+                                />
+                            )}
+                            {loading && <span>Criando Campanha</span>}
+                            {!loading && <span>Criar</span>}
+                        </Button>
+
+                          <Snackbar open={this.state.show} autoHideDuration={6000} onClose={()=>{this.handleClose()}}>
+                            <Alert onClose={()=>{this.handleClose()}} severity="success">
+                              Campanha cadastrada com sucesso!
+                            </Alert>
+                         </Snackbar>
                      </form>
                  </div>
              </div>
@@ -113,37 +151,4 @@ export default CadastrarCampanhas;
   }));
 
   
-function CustomizedSnackbars() {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-  
-    const handleClick = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen(false);
-    };
-  
-    return (
-      <div className={classes.root}>
-        <Button variant="outlined" onClick={handleClick}>
-          Open success snackbar
-        </Button>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            This is a success message!
-          </Alert>
-        </Snackbar>
-        <Alert severity="error">This is an error message!</Alert>
-        <Alert severity="warning">This is a warning message!</Alert>
-        <Alert severity="info">This is an information message!</Alert>
-        <Alert severity="success">This is a success message!</Alert>
-      </div>
-    );
-  }
-  
+
