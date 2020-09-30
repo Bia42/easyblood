@@ -1,16 +1,51 @@
-import React from 'react'
-import FullCalendar, { formatDate } from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './event-utils'
+import React from 'react';
+import FullCalendar, { formatDate } from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import { INITIAL, createEventId } from './event-utils';
+import * as utils from "../utils/utils";
+import axios from 'axios';
+
+console.log(INITIAL)
 
 export default class DemoApp extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            weekendsVisible: true,
+            currentEvents: [],
+            usersAgenda: [],
+            INITIAL_EVENTS: [],
+            some: ''
+        }
+        this.procurarAgenda = this.procurarAgenda.bind(this);
+        this.handleEventsAgenda = this.handleEventsAgenda.bind(this);
 
-  state = {
-    weekendsVisible: true,
-    currentEvents: []
-  }
+        this.procurarAgenda();
+    }
+
+    procurarAgenda(e) {
+        axios.post('/rest/hemocentro/listAgendados',{
+            hemocentroId: utils.getCookie(),
+            })
+            .then(response => {
+             console.log(response.data);
+             this.setState({usersAgenda: response.data});
+            })
+            .catch(e=> {
+             // console.log("e.resp:");
+                 console.log(e.response.status);
+        });    
+
+        setTimeout(() => {
+            this.setState({
+                INITIAL_EVENTS: this.handleEventsAgenda()        
+            })
+            console.log(this.state.INITIAL_EVENTS)
+        }, 6000); 
+    }
 
   render() {
     return (
@@ -18,19 +53,30 @@ export default class DemoApp extends React.Component {
         {this.renderSidebar()}
         <div className='demo-app-main'>
           <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
             headerToolbar={{
               left: 'prev,next today',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             }}
+            buttonText= {{
+                month: 'Mês',
+                week: 'Semana',
+                today: 'Hoje',
+                day: 'Dia',
+                list: 'Lista',
+            }}
+            weekTex= 'Sm'
+            allDayText= 'dia inteiro'
+            noEventsText= 'Não há eventos para mostrar'
             initialView='dayGridMonth'
+            locale='pt-br'
             editable={true}
             selectable={true}
             selectMirror={true}
             dayMaxEvents={true}
             weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+            events={this.state.INITIAL_EVENTS}
             select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
             eventClick={this.handleEventClick}
@@ -50,11 +96,11 @@ export default class DemoApp extends React.Component {
     return (
       <div className='demo-app-sidebar'>
         <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
+          <h2>Instruções</h2>
           <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
+            <li>Selecione as datas e você será solicitado a criar um novo evento</li>
+            <li>Arraste, solte e redimensione eventos</li>
+            <li>Clique em um evento para excluí-lo</li>
           </ul>
         </div>
         <div className='demo-app-sidebar-section'>
@@ -64,13 +110,13 @@ export default class DemoApp extends React.Component {
               checked={this.state.weekendsVisible}
               onChange={this.handleWeekendsToggle}
             ></input>
-            toggle weekends
+            Alternar fins de semana
           </label>
         </div>
         <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
+          <h2>Todos os eventos ({this.state.usersAgenda.length})</h2>
           <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
+            {this.state.usersAgenda.map(this.renderAgendaEvent)}
           </ul>
         </div>
       </div>
@@ -101,11 +147,21 @@ export default class DemoApp extends React.Component {
   }
 
   handleEventClick = (clickInfo) => {
-    // eslint-disable-next-line no-restricted-globals
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    if (prompt(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
       clickInfo.event.remove()
     }
   }
+
+  handleEventsAgenda = () => {    
+    return(    
+        this.state.usersAgenda.map(usersAgenda =>(             
+                {
+                title: usersAgenda.nomeDoador,
+                start: usersAgenda.horarioDoacao
+                }
+            ))
+        )
+    }
 
   handleEvents = (events) => {
     this.setState({
@@ -113,6 +169,14 @@ export default class DemoApp extends React.Component {
     })
   }
 
+  renderAgendaEvent = (event) => {
+        return (
+            <li key={event.agendaId}>
+            <b>{formatDate(event.horarioDoacao, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+            <i>{event.nomeDoador}</i>
+            </li>
+        )
+    }
 }
 
 function renderEventContent(eventInfo) {
@@ -121,14 +185,5 @@ function renderEventContent(eventInfo) {
       <b>{eventInfo.timeText}</b>
       <i>{eventInfo.event.title}</i>
     </>
-  )
-}
-
-function renderSidebarEvent(event) {
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <i>{event.title}</i>
-    </li>
   )
 }

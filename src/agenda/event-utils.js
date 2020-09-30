@@ -1,7 +1,7 @@
 let eventGuid = 0
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
 
-export const INITIAL_EVENTS = [
+export const INITIAL = [
   {
     id: createEventId(),
     title: 'All-day event',
@@ -10,7 +10,7 @@ export const INITIAL_EVENTS = [
   {
     id: createEventId(),
     title: 'Timed event',
-    start: todayStr + 'T14:00:00'
+    start: todayStr + 'T12:00:00'
   }
 ]
 
