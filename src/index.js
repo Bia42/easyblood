@@ -21,6 +21,7 @@ import ListarCupons from './ListarCupons';
 import AtendimentoHemocentro from './AtendimentoHemocentro';
 import Agenda from './agenda/main.jsx';
 import CadastrarCampanhas from './CadastrarCampanhas';
+import DivulgarCampanhas from './DivulgarCampanhas';
 
 
 
@@ -42,6 +43,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/atendimentoHemocentro" component={AtendimentoHemocentro}/>   
             <Route path="/agenda" component={Agenda}/>
             <Route path="/cadastrarCampanhas" component={CadastrarCampanhas}/>
+            <Route path="/divulgarCampanhas" component={DivulgarCampanhas}/>
         </Switch>
     </BrowserRouter>)
     , document.getElementById('root'));
