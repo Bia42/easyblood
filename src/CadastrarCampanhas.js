@@ -10,10 +10,8 @@ import Header from './componentes/Header';
 import * as utils from "./utils/utils";
 import Alert from '@material-ui/lab/Alert';
 import { Snackbar } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
-
 
 class CadastrarCampanhas extends Component {
     
@@ -138,8 +136,6 @@ class CadastrarCampanhas extends Component {
 }
 
 export default CadastrarCampanhas;
- 
-
   
   const useStyles = makeStyles((theme) => ({
     root: {

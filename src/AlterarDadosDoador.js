@@ -88,7 +88,7 @@ class AlterarDadosDoador extends Component {
                              </span>                             
                          </div>
 
-                        <Button  className="login100-form-btn" variant="primary" onClick={this.procurarCpf} disabled={this.state.btn_show}>
+                        <Button className="login100-form-btn" variant="primary" onClick={this.procurarCpf} disabled={this.state.btn_show}>
                             {loading && (
                                 <i
                                 className="fa fa-refresh fa-spin"

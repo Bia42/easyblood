@@ -10,10 +10,8 @@ import Header from './componentes/Header';
 import * as utils from "./utils/utils";
 import Alert from '@material-ui/lab/Alert';
 import { Snackbar } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
-
 
 class DivulgarCampanhas extends Component {
     
@@ -176,7 +174,7 @@ class DivulgarCampanhas extends Component {
                                 />
                          </div>             
                         
-                        <Button  className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)} >
+                        <Button className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)} >
                             {loading && (
                                 <i
                                 className="fa fa-refresh fa-spin"
@@ -202,9 +200,7 @@ class DivulgarCampanhas extends Component {
 }
 
 export default DivulgarCampanhas;
- 
 
-  
   const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
