@@ -91,3 +91,9 @@ export function setCookie(userLogado) {
 export function getCookie() {
   return cookies.get('userLogado');
 }
+
+export function retornaDataHoraAtual(){
+  var dNow = new Date();
+  var localdate = dNow.getFullYear() + '-' + (dNow.getMonth()+1)  + '-' + dNow.getDate();
+  return localdate;
+  }
