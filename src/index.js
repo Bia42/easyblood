@@ -23,6 +23,7 @@ import Agenda from './agenda/main.jsx';
 import CadastrarCampanhas from './CadastrarCampanhas';
 import DivulgarCampanhas from './DivulgarCampanhas';
 import CheckIn from './CheckIn';
+import Relatorio from './GerarRelatorio';
 
 
 
@@ -47,6 +48,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/cadastrarCampanhas" component={CadastrarCampanhas}/>
             <Route path="/divulgarCampanhas" component={DivulgarCampanhas}/>
             <Route path="/confirmarCheckIn" component={CheckIn}/>
+            <Route path="/gerarRelatorio" component={Relatorio}/>
 
         </Switch>
     </BrowserRouter>)
