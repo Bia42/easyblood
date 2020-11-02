@@ -130,9 +130,9 @@ class DivulgarCampanhas extends Component {
                          </span>
      
                          <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                             <input className="input100" type="text" name="descricao" placeholder="Descrição da Campanha"
-                                    ref={(input) => this.descricao = input} required/>
-                             <span className="focus-input100"></span>
+
+                            <textarea className="input100" rows="10" cols="33" type="text" name="descricao" placeholder="Descrição da Campanha" ref={(input) => this.descricao = input} required/>
+                            <span className="focus-input100"></span>
                             <span className="symbol-input100">
                                 <span className="lnr lnr-text-align-justify"></span>
 						    </span>
@@ -151,16 +151,6 @@ class DivulgarCampanhas extends Component {
                                 <option value = "AB-">AB-</option>
                                 <option value = "O+">O+</option>
                                 <option value = "O-">O-</option>
-                            </select>
-                        </div>
-
-                        <div className="wrap-input100 validate-input m-b-16">
-                            <p>Vincular a Patrocinador:</p>
-                            <select id="dropdownHemocentros" onChange={this.handleDropdownChange4} required>
-                                <option value="">Selecione uma opção</option>    
-                                {this.state.campanhas.map(campanhas =>(
-                                    <option key={campanhas.campanhaId} value = {campanhas.campanhaId}>{campanhas.descricao}</option>
-                                ))}
                             </select>
                         </div>
 
