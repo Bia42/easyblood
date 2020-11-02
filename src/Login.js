@@ -34,7 +34,7 @@ class Login extends Component{
 		};
 		
 		if(this.state.selectTipo == 'C'){
-			axios.post('/rest/hemocentro/login',{
+			axios.post(utils.URL_BASE + '/rest/hemocentro/login',{
 				email: this.username.value,
 				senha: this.password.value,
 				})
