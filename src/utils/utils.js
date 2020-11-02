@@ -1,6 +1,10 @@
 import Cookies from 'universal-cookie';
 
+<<<<<<< HEAD
 export const URL_BASE = process.env.REACT_APP_API_URL;
+=======
+export const URL_BASE = "https://doemais-hom.herokuapp.com/";
+>>>>>>> 9152418ed105c74ffb73076fd73eb331f46b6ece
 export const cookies = new Cookies();
 
 export function novoRequestInfo(body) {
