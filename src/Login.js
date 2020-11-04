@@ -36,7 +36,7 @@ class Login extends Component{
 			'Access-Control-Allow-Origin': '*'		  }
 
 		if(this.state.selectTipo == 'C'){
-			axios.post(utils.URL_BASE + '/rest/hemocentro/login',{
+			axios.post('https://doemais-hom.herokuap.com/rest/hemocentro/login',{
 				email: this.username.value,
 				senha: this.password.value,
 				})
