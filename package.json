@@ -2,7 +2,7 @@
   "name": "easyblood",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://doemais-hom.herokuapp.com/",
+  "proxy": "http://localhost/doemais",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fullcalendar/bootstrap": "^5.3.1",
