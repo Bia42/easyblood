@@ -39,8 +39,6 @@ class Login extends Component{
 			axios.post(utils.URL_BASE + '/rest/hemocentro/login',{
 				email: this.username.value,
 				senha: this.password.value,
-				}, {
-					headers: headers
 				})
 			.then(response => {
 				// console.log("response:");
@@ -58,9 +56,11 @@ class Login extends Component{
 					 this.setState({msg: e.response.data});
 				});
 		}else{
-			axios.post('/rest/patrocinador/login',{
+			axios.post(utils.URL_BASE + '/rest/patrocinador/login',{
 				email: this.username.value,
 				senha: this.password.value,
+				}, {
+					headers: headers
 				})
 			.then(response => {
 				// console.log("response:");
