@@ -30,15 +30,15 @@ export default class Header extends Component{
                                     utils.usuarioLogado() != null ?
                                     (
                                         <React.Fragment>
-                                            {/*<li className="pure-menu-item"><Link to="/cadastroDoador" className="pure-menu-link">Cadastro de doador</Link></li>
-                                            <li className="pure-menu-item"><Link to="/verificarNiveis" className="pure-menu-link">Verificar Niveis</Link></li>
-                                            <li className="pure-menu-item"><Link to="/comunicacaoHemocentros" className="pure-menu-link">Comunicação entre Hemocentros</Link></li>
-                                            <li className="pure-menu-item"><Link to="/gerenciarColetores" className="pure-menu-link">Gerenciar coletores</Link></li>
-                                            <li className="pure-menu-item"><Link to="/cadastrarCampanhas" className="pure-menu-link">Campanhas</Link></li>*/}
-                                            <li className="pure-menu-item"><Link to="/listarCupons" className="pure-menu-link">Listar Cupons</Link></li> 
-                                            <li className="pure-menu-item"><Link to="/gerarCupons" className="pure-menu-link">Gerar Cupons</Link></li> 
-                                            <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Logout</Link></li>
-                                        </React.Fragment>
+                                    {/*<li className="pure-menu-item"><Link to="/cadastroDoador" className="pure-menu-link">Cadastro de doador</Link></li>*/}
+                                   {/*  <li className="pure-menu-item"><Link to="/verificarNiveis" className="pure-menu-link">Verificar Niveis</Link></li>
+                                    <li className="pure-menu-item"><Link to="/comunicacaoHemocentros" className="pure-menu-link">Comunicação entre Hemocentros</Link></li>
+                                    <li className="pure-menu-item"><Link to="/gerenciarColetores" className="pure-menu-link">Gerenciar coletores</Link></li>
+                                    <li className="pure-menu-item"><Link to="/cadastrarCampanhas" className="pure-menu-link">Campanhas</Link></li>    */}
+                                    <li className="pure-menu-item"><Link to="/listarCupons" className="pure-menu-link">Listar Cupons</Link></li> 
+                                    <li className="pure-menu-item"><Link to="/gerarCupons" className="pure-menu-link">Gerar Cupons</Link></li> 
+                                    <li className="pure-menu-item"><Link to="/" className="pure-menu-link" onClick={utils.logout}>Logout</Link></li>
+                                    </React.Fragment>
                                     ):
                                     (   
                                         <React.Fragment>

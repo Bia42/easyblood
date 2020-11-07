@@ -32,9 +32,12 @@ class Login extends Component{
 				Authorization:'Basic ' + new Buffer(this.username.value + ':' + this.password.value).toString('base64')
 			}
 		};
-		
+		const headers = {
+			'Access-Control-Allow-Origin': '*'		  
+		}
+
 		if(this.state.selectTipo == 'C'){
-			axios.post('/rest/hemocentro/login',{
+			axios.post(utils.URL_BASE + '/rest/hemocentro/login',{
 				email: this.username.value,
 				senha: this.password.value,
 				})
@@ -54,7 +57,7 @@ class Login extends Component{
 					 this.setState({msg: e.response.data});
 				});
 		}else{
-			axios.post('/rest/patrocinador/login',{
+			axios.post(utils.URL_BASE + '/rest/patrocinador/login',{
 				email: this.username.value,
 				senha: this.password.value,
 				})
