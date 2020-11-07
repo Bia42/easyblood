@@ -46,9 +46,13 @@ class GerarRelatorio extends Component {
 
         setTimeout(() => {
             this.setState({ loading: false });
-        }, 6000);        
+        }, 6000); 
 
-        this.setState({btn_show: false})
+        this.setState({ btn_show: true });
+
+        setTimeout(() => {
+            this.setState({ btn_show: false });
+        }, 6000);
     }
     
     render(){

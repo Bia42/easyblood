@@ -98,12 +98,15 @@ img::-moz-selection {
 }
 
 .btn-primary:active,
-.btn-primary:focus,
-.btn-primary:hover {
+.btn-primary:focus {
 	background-color: #fc2020!important;
 	border-color: #fc2020!important;
 	color: #fff
 }
+
+.btn-primary:hover {
+	background: #333333;
+  }
 
 .btn-primary:active,
 .btn-primary:focus {
