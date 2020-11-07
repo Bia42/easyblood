@@ -33,7 +33,7 @@ class CheckIn extends Component {
     
     procurarCheckIn(e) {
         console.log(utils.retornaDataHoraAtual());
-        axios.post('/rest/hemocentro/checkInPendentes',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/checkInPendentes',{
             hemocentroId: utils.getCookie(),
             })
             .then(response => {
@@ -55,7 +55,7 @@ class CheckIn extends Component {
             window.location = "/login";
 
          
-        axios.post('/rest/hemocentro/confirmacaoCheckIn',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/confirmacaoCheckIn',{
             agendaId:  agendaId
             })
             .then(response => {
@@ -80,7 +80,7 @@ class CheckIn extends Component {
             window.location = "/login";
 
          
-        axios.post('/rest/hemocentro/desmarcarAgendamento',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/desmarcarAgendamento',{
             agendaId:  agendaId
             })
             .then(response => {

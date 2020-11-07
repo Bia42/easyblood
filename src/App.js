@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {CardList} from './componentes/patrocinadores-list.component.jsx'
 import './App.css';
 import Header from './componentes/Header';
+import * as utils from "./utils/utils";
 
 class App extends Component {
   constructor(){
@@ -14,7 +15,7 @@ class App extends Component {
   }
   
   componentDidMount(){
-      fetch('/rest/patrocinador/listPatrocinadores')
+      fetch(utils.URL_BASE + '/rest/patrocinador/listPatrocinadores')
       .then (response => response.json())
       .then (users => this.setState({patrocinadores: users}));
     }

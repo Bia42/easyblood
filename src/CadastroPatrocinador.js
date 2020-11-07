@@ -71,7 +71,7 @@ class CadastroPatrocinador extends Component {
             });
         
 
-		axios.post('/rest/patrocinador/add',   {
+		axios.post(utils.URL_BASE + '/rest/patrocinador/add',   {
         cnpj: this.cnpj.value,
         razaoSocial: this.name.value,
         senha: this.password.value,

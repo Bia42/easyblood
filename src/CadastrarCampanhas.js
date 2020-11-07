@@ -45,7 +45,7 @@ class CadastrarCampanhas extends Component {
             window.location = "/login";
 
          
-        axios.post('/rest/patrocinador/cadastrarCampanhas',{
+        axios.post(utils.URL_BASE + '/rest/patrocinador/cadastrarCampanhas',{
             patrocinadorId:  localStorage.getItem("Dados"),
             quantCupons: this.quant.value,
             descricao: this.descricao.value

@@ -31,7 +31,7 @@ class GerarCupons extends Component {
             window.location = "/login";
 
          
-        axios.post('/rest/patrocinador/gerarCupons',{
+        axios.post(utils.URL_BASE + '/rest/patrocinador/gerarCupons',{
             patrocinadorId:  localStorage.getItem("Dados"),
             quantidade: this.quant.value,
             descricao: this.descricao.value

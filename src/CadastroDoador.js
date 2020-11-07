@@ -32,7 +32,7 @@ class CadastroDoador extends Component {
     }
     
     componentDidMount(){
-        fetch('/rest/hemocentro/listHemocentros')
+        fetch(utils.URL_BASE + '/rest/hemocentro/listHemocentros')
         .then (response => response.json())
         .then (listHemocentros => this.setState({usersHemocentros: listHemocentros}));
       }
@@ -89,7 +89,7 @@ class CadastroDoador extends Component {
             hemocentroId: hemocentro_id
             });
 		
-		axios.post('/rest/hemocentro/add',   {
+		axios.post(utils.URL_BASE + '/rest/hemocentro/add',   {
         cpf: this.cpf.value,
         nome: this.name.value,
         senha: this.password.value,

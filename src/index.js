@@ -13,8 +13,6 @@ import CadastroPatrocinador from './CadastroPatrocinador';
 import CadastroColetor from './CadastroColetor';
 import GerenciarColetores from './GerenciarColetores';
 import AlterarDadosDoador from './AlterarDadosDoador';
-import ComunicacaoHemocentro from './ComunicacaoHemocentro';
-import CadastroRequisitos from './CadastroRequisitos';
 import VerificarNiveis from './VerificarNiveis';
 import GerarCupons from './GerarCupons';
 import ListarCupons from './ListarCupons';
@@ -37,10 +35,7 @@ ReactDOM.render(/*<App />*/
             <Route path="/gerarCupons" component={GerarCupons}/>
             <Route path="/cadastroDoador" component={CadastroDoador}/>
             <Route path="/cadastroColetor" component={CadastroColetor}/>
-            <Route path="/gerenciarColetores" component={GerenciarColetores}/>
             <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
-            <Route path="/comunicacaoHemocentros" component={ComunicacaoHemocentro}/>
-            <Route path="/cadastroRequisitos" component={CadastroRequisitos}/>
             <Route path="/verificarNiveis" component={VerificarNiveis}/>     
             <Route path="/listarCupons" component={ListarCupons}/>    
             <Route path="/atendimentoHemocentro" component={AtendimentoHemocentro}/>   

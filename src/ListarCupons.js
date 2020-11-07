@@ -19,7 +19,7 @@ class ListarCupons extends Component {
             cuponsResgatados:[]
         };
 
-        axios.post('/rest/patrocinador/listCuponsAtivosPorPatrocinador',{
+        axios.post(utils.URL_BASE + '/rest/patrocinador/listCuponsAtivosPorPatrocinador',{
             patrocinadorId:  localStorage.getItem("Dados"),
             })
             .then(response => {
@@ -35,7 +35,7 @@ class ListarCupons extends Component {
         });
 
         
-        axios.post('/rest/patrocinador/listCuponsResgatadosPorPatrocinador',{
+        axios.post(utils.URL_BASE + '/rest/patrocinador/listCuponsResgatadosPorPatrocinador',{
             patrocinadorId:  localStorage.getItem("Dados"),
             })
             .then(response => {

@@ -33,7 +33,7 @@ class DivulgarCampanhas extends Component {
   }  
       
   componentDidMount(){
-    fetch('/rest/hemocentro/listCampanhas')
+    fetch(utils.URL_BASE + '/rest/hemocentro/listCampanhas')
     .then (response => response.json())
     .then (listCampanhas => this.setState({campanhas: listCampanhas}));
   }
@@ -65,7 +65,7 @@ class DivulgarCampanhas extends Component {
             window.location = "/login";
 
          
-        axios.post('/rest/hemocentro/dilvugarCampanha',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/dilvugarCampanha',{
             descricao: this.descricao.value,
             tipoSangue:  this.state.selectValueTipoSangue,
             conteudo: this.state.logo

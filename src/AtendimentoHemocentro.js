@@ -41,7 +41,7 @@ class AtendimentoHemocentro extends Component {
             horaFinal: this.hora_final.value
             });   
             
-            axios.post('/rest//hemocentro/addAgenda',   {
+            axios.post(utils.URL_BASE + '/rest/hemocentro/addAgenda',   {
                 hemocentroId: utils.getCookie(),
                 horaFinal:  this.hora_final.value,
                 horaInicio: this.hora_inicio.value,

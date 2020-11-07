@@ -28,7 +28,7 @@ class GerarRelatorio extends Component {
     }
     
     gerarRelatorio(e) {
-        axios.post('/rest/hemocentro/relatorioNivel',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/relatorioNivel',{
             hemocentroId: utils.getCookie(),
             }, {responseType: 'arraybuffer'})            
             .then(response => {

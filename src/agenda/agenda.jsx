@@ -22,7 +22,7 @@ class agenda extends Component  {
     }
 
     procurarAgenda(e) {
-        axios.post('/rest/hemocentro/listAgendados',{
+        axios.post(utils.URL_BASE + '/rest/hemocentro/listAgendados',{
             hemocentroId: utils.getCookie(),
             })
             .then(response => {
