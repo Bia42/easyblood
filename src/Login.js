@@ -33,10 +33,11 @@ class Login extends Component{
 			}
 		};
 		const headers = {
-			'Access-Control-Allow-Origin': '*'		  }
+			'Access-Control-Allow-Origin': '*'		  
+		}
 
 		if(this.state.selectTipo == 'C'){
-			axios.post('https://doemais-hom.herokuapp.com/rest/hemocentro/login',{
+			axios.post(utils.URL_BASE + '/rest/hemocentro/login',{
 				email: this.username.value,
 				senha: this.password.value,
 				})
@@ -59,8 +60,6 @@ class Login extends Component{
 			axios.post(utils.URL_BASE + '/rest/patrocinador/login',{
 				email: this.username.value,
 				senha: this.password.value,
-				}, {
-					headers: headers
 				})
 			.then(response => {
 				// console.log("response:");
