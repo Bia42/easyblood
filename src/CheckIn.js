@@ -114,7 +114,7 @@ class CheckIn extends Component {
                  <div className="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
                      <form className="login100-form validate-form" >
                          <span className="login100-form-title p-b-55">
-                            Confirmação de Check-In
+                            Check-In
                          </span>
                         <div>            
                             <table className="table table-sm  table-hover">
@@ -125,23 +125,22 @@ class CheckIn extends Component {
                                     <th scope="col">CPF</th>
                                     <th scope="col">Excluir</th>                                   
                                     <th scope="col" >Confirmar CheckIn</th>
-                                  
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {this.state.checkinPendentes.map(checkinPendentes =>(
                                     <tr key={checkinPendentes.agendaId}>
-                                            <td>{checkinPendentes.horarioDoacao}</td>
-                                            <td>{checkinPendentes.nomeDoador}</td>
-                                            <td>{checkinPendentes.cpfDoador}</td>
-                                            <td className="padding10">
-                                                <button href="#" className="btn btn-danger btn-sm lixeira" onClick={() => this.handleClick2(checkinPendentes.agendaId)} ><i className="delete fa fa-trash"></i></button>
-                                            </td>
-                                            <td>
-                                                    <button type="button" id="btnValida" className="btn btn-success btn-sm teste" data-toggle="modal"
-                                                    data-target="#exampleModal" onClick={() => this.handleClick(checkinPendentes.agendaId)}>Confirmar</button>
-                                            </td>
-                                        </tr>
+                                        <td>{checkinPendentes.horarioDoacao}</td>
+                                        <td>{checkinPendentes.nomeDoador}</td>
+                                        <td>{checkinPendentes.cpfDoador}</td>
+                                        <td className="padding10">
+                                            <button href="#" className="btn btn-danger btn-sm lixeira" onClick={() => this.handleClick2(checkinPendentes.agendaId)} ><i className="delete fa fa-trash"></i></button>
+                                        </td>
+                                        <td>
+                                            <button type="button" id="btnValida" className="btn btn-success btn-sm teste" data-toggle="modal"
+                                            data-target="#exampleModal" onClick={() => this.handleClick(checkinPendentes.agendaId)}>Confirmar</button>
+                                        </td>
+                                    </tr>
                                 ))}
 
                                 </tbody>

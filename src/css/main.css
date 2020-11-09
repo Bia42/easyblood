@@ -219,7 +219,7 @@ iframe {
 }
 
 .wrap-login100 {
-  width: 450px;
+  width: 550px;
   background: #fff;
   border-radius: 3px;
   overflow: hidden;
@@ -570,7 +570,7 @@ iframe {
 /*//////////////////////////////////////////////////////////////////
 [ responsive ]*/
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .wrap-login100 {
     padding-left: 15px;
     padding-right: 15px;

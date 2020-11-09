@@ -15,21 +15,34 @@ class GerarRelatorio extends Component {
     constructor(props){
         super(props)
         this.state = {msg:'',
-        btn_show: false,
-        loading: false
+        btn_show: true,
+        loading: false,
+        selectValueMes: "",
+        selectedOption: ""
         }
         this.gerarRelatorio = this.gerarRelatorio.bind(this);
         this.btn_handleModal_on = this.btn_handleModal_on.bind(this);
+        this.handleDropdownChange3 = this.handleDropdownChange3.bind(this);
+        this.onValueChange = this.onValueChange.bind(this);
     }
 
     btn_handleModal_on(e) 
     {
-        this.setState({btn_show: true})
+        this.setState({btn_show: false})
+    }
+    handleDropdownChange3(e) {
+        this.setState({ selectValueMes: e.target.value });
+        this.setState({btn_show: false})
+    }
+    onValueChange(e) {
+        this.setState({ selectedOption: e.target.value });
     }
     
     gerarRelatorio(e) {
         axios.post(utils.URL_BASE + '/rest/hemocentro/relatorioNivel',{
             hemocentroId: utils.getCookie(),
+            mes: this.state.selectValueMes,
+            relatorio: this.state.selectedOption,
             }, {responseType: 'arraybuffer'})            
             .then(response => {
              console.log(response);
@@ -67,6 +80,33 @@ class GerarRelatorio extends Component {
                          <span className="login100-form-title p-b-55">
                             Gerar Relatório
                          </span>
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Relatório:</p>
+                            <select id="dropdownMes" onChange={this.onValueChange} required>
+                                <option value="">Selecione uma opção</option>
+                                <option value = "h_niveisSangue">Níveis de Sangue</option>
+                                <option value = "h_numeroDoacoes">Número de Doações</option>
+                                <option value = "h_niveisSangue_completo">Completo</option>
+                            </select>
+                        </div>
+                         <div className="wrap-input100 validate-input m-b-16">
+                            <p>Mês:</p>
+                            <select id="dropdownMes" onChange={this.handleDropdownChange3} required>
+                                <option value="">Selecione uma opção</option>
+                                <option value = "1">Janeiro</option>
+                                <option value = "2">Fevereiro</option>
+                                <option value = "3">Março</option>
+                                <option value = "4">Abril</option>
+                                <option value = "5">Maio</option>
+                                <option value = "6">Junho</option>
+                                <option value = "7">Julho</option>
+                                <option value = "8">Agosto</option>
+                                <option value = "9">Setembro</option>
+                                <option value = "10">Outubro</option>
+                                <option value = "11">Novembro</option>
+                                <option value = "12">Dezembro</option>
+                            </select>
+                        </div>
                             <Button className="login100-form-btn" variant="primary" onClick={this.gerarRelatorio} disabled={this.state.btn_show}>
                                 {loading && (
                                     <i
