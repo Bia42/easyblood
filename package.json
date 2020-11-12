@@ -1,10 +1,9 @@
 {
   "name": "easyblood",
-
-  "dependencies": {  "version": "0.1.0",
   "private": true,
-  "proxy": "https://doemais-app.herokuapp.com",
-  "@fortawesome/fontawesome-free": "^5.15.1",
+  "proxy": "https://doemais-app.herokuapp.com/",
+  "dependencies": {  "version": "0.1.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "@fullcalendar/bootstrap": "^5.3.1",
     "@fullcalendar/core": "^5.3.1",
     "@fullcalendar/daygrid": "^5.3.2",
