@@ -120,7 +120,7 @@ render() {
               <li className="timeline-inverted">
                 <div className="timeline-panel">
                   <div className="timeline-heading">
-                    <h4>Maio 2020</h4>
+                    <h4>Junho 2020</h4>
                     <h4 className="subheading">Entrega da primeira versão</h4>
                   </div>
                   <div className="timeline-body">
@@ -128,6 +128,17 @@ render() {
                   </div>
                 </div>
               </li>
+              <li>
+                <div className="timeline-panel">
+                  <div className="timeline-heading">
+                    <h4>Novembro de 2020</h4>
+                    <h4 className="subheading">Entrega final</h4>
+                  </div>
+                  <div className="timeline-body">
+                    <p className="text-muted">Projeto finalizado com sucesso! Com a determinação e esforço da nossa equipe </p>
+                  </div>
+                </div>
+              </li>             
               <li className="timeline-inverted">
                   <h4>Faça parte
                     <br/>da nossa
