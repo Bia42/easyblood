@@ -132,7 +132,7 @@ class Login extends Component{
 							</span>
 						</div>
 						<div className="container-login100-form-btn p-t-25">
-							<a className="txt1 hov1" href="/cadastroDoador">
+							<a className="txt1 hov1" href="/cadastroColaborador">
 								Cadastre-se Colaborador!
 							</a>
 							<a className="txt1 hov1" href="/cadastroPatrocinador">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import './css/main.css';
 import './css/util.css';
 import './css/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
@@ -23,7 +24,11 @@ class CadastroPatrocinador extends Component {
         selectValueUsersHemocentros:"",
         selectcnpj:"",
         selectedFile: null,
-        logo:""
+        logo:"",
+        show: false,
+        btn_show: true,
+        loading: false,
+        msg:''
         }
 
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -31,9 +36,15 @@ class CadastroPatrocinador extends Component {
         this.handleDropdownChange3 = this.handleDropdownChange3.bind(this);
         this.handleDropdownChange4 = this.handleDropdownChange4.bind(this);
 
-    
-
     }
+    handleModal()
+    {
+        this.setState({show: !this.state.show})
+        if(this.state.show = false){
+			this.props.history.push("/")
+        }
+    }
+
     
 
 
@@ -84,12 +95,22 @@ class CadastroPatrocinador extends Component {
         cep: this.cep.value,
         complemento: this.complemento.value,
         logo: this.state.logo
-        })
+        }, {responseType: 'arraybuffer'})
 		.then(response => {
             console.log(response);
-            window.location = "/login";
+                const file = new Blob([response.data], {type: 'application/pdf'});
+                const fileURL = URL.createObjectURL(file);
+                window.open(fileURL);
+                setTimeout(() => {
+                    this.handleModal()
+                  }, 3000);
+                  setTimeout(() => {
+                    this.props.history.push("/")
+                }, 6000);
+
+                
 			localStorage.setItem('dados', response.data);
-		//	this.props.history.push("/")
+		
 			}).catch(error=> {
 				this.setState({msg: error.response.data});
 			    console.log(error);
@@ -127,7 +148,7 @@ class CadastroPatrocinador extends Component {
                      <form className="login100-form validate-form"  onSubmit={this.envia.bind(this)}>
 
                          <span className="login100-form-title p-b-55">
-                             Cadastro de Patrocinador
+                             Solicitação de Cadastro
                          </span>                         
                              
                          <span>{this.state.msg}</span>
@@ -241,6 +262,23 @@ class CadastroPatrocinador extends Component {
                          <div className="container-login100-form-btn p-t-25">
                              <input type="submit" className="login100-form-btn"  value = "Cadastrar"/>
                          </div>
+                         <Modal show={this.state.show} onHide={()=>{this.handleModal()}} centered size="lg" aria-labelledby="contained-modal-title-vcenter">
+                         <Modal.Header closeButton>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Solicitação de cadastro 
+                            </Modal.Title>
+                         </Modal.Header>
+                         <Modal.Body>
+                            <h4>AVISO</h4>
+                            <p>Enviar o contrato assinado para o email de suporte doemais: doemais.contato@gmail.com</p>
+                            <p>Após a liberação, enviaremos um email comunicando</p>
+                         </Modal.Body>
+                         <Modal.Footer>
+                            <Button onClick={()=>{this.handleModal()}}>
+                                Fechar
+                            </Button>
+                         </Modal.Footer>
+                         </Modal>
                      </form>
                  </div>
              </div>

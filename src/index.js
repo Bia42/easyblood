@@ -33,9 +33,9 @@ ReactDOM.render(/*<App />*/
             <Route path="/login" component={Login}/>
             <Route path="/cadastroPatrocinador" component={CadastroPatrocinador}/>
             <Route path="/gerarCupons" component={GerarCupons}/>
-            <Route path="/cadastroDoador" component={CadastroDoador}/>
+            <Route path="/cadastroColaborador" component={CadastroDoador}/>
             <Route path="/cadastroColetor" component={CadastroColetor}/>
-            <Route path="/alterarDadosDoador" component={AlterarDadosDoador}/>
+            <Route path="/historicoDoador" component={AlterarDadosDoador}/>
             <Route path="/verificarNiveis" component={VerificarNiveis}/>     
             <Route path="/listarCupons" component={ListarCupons}/>    
             <Route path="/atendimentoHemocentro" component={AtendimentoHemocentro}/>   
