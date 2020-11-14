@@ -549,7 +549,8 @@ header.masthead .intro-text .intro-heading {
 	.timeline>li .timeline-image {
 		width: 150px;
 		height: 150px;
-		margin-left: -75px
+		margin-left: -75px;
+		display: initial;
 	}
 	.timeline>li .timeline-image h4 {
 		font-size: 18px;

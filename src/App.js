@@ -85,9 +85,6 @@ render() {
           <div className="col-lg-12">
             <ul className="timeline">
               <li>
-                <div className="timeline-image">
-                  <img className="rounded-circle img-fluid" src="img/about/1.jpg" alt=""/>
-                </div>
                 <div className="timeline-panel">
                   <div className="timeline-heading">
                     <h4>2020</h4>
@@ -99,9 +96,6 @@ render() {
                 </div>
               </li>
               <li className="timeline-inverted">
-                <div className="timeline-image">
-                  <img className="rounded-circle img-fluid" src="img/about/2.jpg" alt=""/>
-                </div>
                 <div className="timeline-panel">
                   <div className="timeline-heading">
                     <h4>Fevereiro 2020</h4>
@@ -113,9 +107,6 @@ render() {
                 </div>
               </li>
               <li>
-                <div className="timeline-image">
-                  <img className="rounded-circle img-fluid" src="img/about/3.jpg" alt=""/>
-                </div>
                 <div className="timeline-panel">
                   <div className="timeline-heading">
                     <h4>Abril 2020</h4>
@@ -127,9 +118,6 @@ render() {
                 </div>
               </li>
               <li className="timeline-inverted">
-                <div className="timeline-image">
-                  <img className="rounded-circle img-fluid" src="img/about/4.jpg" alt=""/>
-                </div>
                 <div className="timeline-panel">
                   <div className="timeline-heading">
                     <h4>Maio 2020</h4>
@@ -141,11 +129,9 @@ render() {
                 </div>
               </li>
               <li className="timeline-inverted">
-                <div className="timeline-image">
                   <h4>Faça parte
                     <br/>da nossa
                     <br/>História!</h4>
-                </div>
               </li>
             </ul>
           </div>
