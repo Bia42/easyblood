@@ -22,6 +22,7 @@ import CadastrarCampanhas from './CadastrarCampanhas';
 import DivulgarCampanhas from './DivulgarCampanhas';
 import CheckIn from './CheckIn';
 import Relatorio from './GerarRelatorio';
+import PatrocinadoresPendentes from './PatrocinadoresPendentes';
 
 
 
@@ -44,6 +45,8 @@ ReactDOM.render(/*<App />*/
             <Route path="/divulgarCampanhas" component={DivulgarCampanhas}/>
             <Route path="/confirmarCheckIn" component={CheckIn}/>
             <Route path="/gerarRelatorio" component={Relatorio}/>
+            <Route path="/avaliacaoPatrocinadores" component={PatrocinadoresPendentes}/>
+
 
         </Switch>
     </BrowserRouter>)

@@ -46,6 +46,9 @@ class Login extends Component{
 				//console.log(response);
 				//console.log(response.data.hemocentroId);
 				utils.setCookie(response.data.hemocentroId);
+
+				localStorage.setItem('Dados', response.data.email);
+
 				//console.log(utils.getCookie());
 				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
 				window.location = "/";
@@ -55,6 +58,7 @@ class Login extends Component{
 					 console.log(e.response.status);
 					 console.log(e.response.data);
 					 this.setState({msg: e.response.data});
+
 				});
 		}else{
 			axios.post(utils.URL_BASE + '/rest/patrocinador/login',{
