@@ -47,7 +47,9 @@ class Login extends Component{
 				//console.log(response.data.hemocentroId);
 				utils.setCookie(response.data.hemocentroId);
 
-				localStorage.setItem('Dados', response.data.email);
+				if(response.data.email == "admin"){
+					localStorage.setItem('Dados', response.data.email);
+				}
 
 				//console.log(utils.getCookie());
 				localStorage.setItem('Authorization', requestInfo.headers.Authorization);
