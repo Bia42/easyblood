@@ -40,6 +40,7 @@ class DivulgarCampanhas extends Component {
 
   handleDropdownChange3(e) {
     this.setState({ selectValueTipoSangue: e.target.value });
+    this.setState({btn_show: false})
   }
   handleDropdownChange4(e) {
     this.setState({ selectValueCampanha: e.target.value });
@@ -72,28 +73,31 @@ class DivulgarCampanhas extends Component {
             })
             .then(response => {
                console.log(response.data);
-
-              setTimeout(() => {
-                this.handleClick()
-              }, 3000);
-              
-            this.setState({ loading: true });
-
-            setTimeout(() => {
-                this.setState({ loading: false });
-            }, 3000);     
-                setTimeout(() => {
-                this.descricao.value = "";
-             }, 3000);
-
             })
             .catch(e=> {
              // console.log("e.resp:");
                  console.log(e.response.status);
-                console.log(e.response.data);
-               
+                console.log(e.response.data);               
         });
-            
+
+        this.setState({ btn_show: true });
+
+        setTimeout(() => {
+            this.setState({ btn_show: false });
+        }, 6000);
+
+        setTimeout(() => {
+          this.handleClick()
+        }, 6000);
+        
+      this.setState({ loading: true });
+
+      setTimeout(() => {
+          this.setState({ loading: false });
+      }, 6000);     
+          setTimeout(() => {
+          this.descricao.value = "";
+       }, 6000);           
             
     }
     
@@ -155,7 +159,7 @@ class DivulgarCampanhas extends Component {
                         </div>
 
                         <div className="wrap-input100 validate-input m-b-16" data-validate = "">
-                            <p>Art Campannha:</p>
+                            <p>Art Campanha:</p>
                             <input
                                     type="file"
                                     accept=".jpeg, .tif, .jpg, .png"
@@ -164,7 +168,7 @@ class DivulgarCampanhas extends Component {
                                 />
                          </div>             
                         
-                        <Button className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)} >
+                        <Button className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)}  disabled={this.state.btn_show}>
                             {loading && (
                                 <i
                                 className="fa fa-refresh fa-spin"
