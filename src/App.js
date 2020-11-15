@@ -19,7 +19,6 @@ class App extends Component {
       .then (response => response.json())
       .then (users => this.setState({patrocinadores: users}));
     }
-//bia
 render() {  
   return ( 
   <div className="App">

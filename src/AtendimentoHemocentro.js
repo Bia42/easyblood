@@ -9,21 +9,44 @@ import Header from './componentes/Header';
 import Form from 'react-bootstrap/Form';
 import * as utils from "./utils/utils";
 import axios from 'axios';
+import Alert from '@material-ui/lab/Alert';
+import { Snackbar } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 class AtendimentoHemocentro extends Component {
     constructor(props){
         super(props)
-        this.state = {msg:''
+        this.state = {msg:'',
+        show: false,
+        btn_show: true,
+        loading: false
         };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleDropdownChange2 = this.handleDropdownChange2.bind(this);
+        this.handleDropdownChange3 = this.handleDropdownChange3.bind(this);
     }
     handleDropdownChange(e) {
         this.setState({ selectDia: e.target.value });
-      }
+     }
     handleDropdownChange2(e) {
         this.setState({ selectDiaFinal: e.target.value });
-      }
+    }
+    handleDropdownChange3(e) {
+        this.setState({btn_show: false})
+    }
+    handleClick()
+    {
+        this.setState({show: !this.state.show})
+    }
+    handleClose()
+    {
+        this.setState({show: !this.state.show})
+    }
+    btn_handleModal_on(e) 
+    {
+        this.setState({btn_show: false})
+    }
     envia(event){
 
 		event.preventDefault();
@@ -56,8 +79,33 @@ class AtendimentoHemocentro extends Component {
                         this.setState({msg: error.response.data});
                         console.log(error);
                     });
+
+        setTimeout(() => {
+            this.handleClick()
+        }, 6000);                   
+
+        this.setState({ btn_show: true });
+
+        setTimeout(() => {
+            this.setState({ btn_show: false });
+        }, 6000);
+            
+        this.setState({ loading: true });
+
+        setTimeout(() => {
+            this.setState({ loading: false });
+        }, 6000);     
+            setTimeout(() => {
+            this.hora_final.value = "";
+            this.hora_inicio.value = "";
+            this.periodo_final.value = "";
+            this.periodo_inicio.value = "";
+            this.quantidade.value = "";
+            this.tempo.value = "";
+            }, 6000);
     }
     render(){
+        const { loading } = this.state;
         return (        
          <div> 
          <Header/>
@@ -101,15 +149,28 @@ class AtendimentoHemocentro extends Component {
                              <span className="focus-input100"/>
                         </div>
 
-                        <div className="wrap-input100 validate-input m-b-16" data-validate = "">
+                        <div className="wrap-input100 validate-input m-b-16" data-validate = "" onChange={this.handleDropdownChange3}>
                             <p>Tempo de doação em minutos:</p>
                              <input className="input100" type="number" name="tempo" maxLength="5" placeholder="Tempo em minutos" ref={(input) => this.tempo = input }/>
                              <span className="focus-input100"/>
                         </div>
 
-                         <div className="container-login100-form-btn p-t-25">
-                             <input type="submit" className="login100-form-btn"  value="Cadastrar"/>
-                         </div>
+                        <Button className="login100-form-btn" variant="primary" onClick={this.envia.bind(this)} disabled={this.state.btn_show}>
+                        {loading && (
+                            <i
+                            className="fa fa-refresh fa-spin"
+                            style={{ marginRight: "5px" }}
+                            />
+                        )}
+                        {loading && <span>Cadastrando</span>}
+                        {!loading && <span>Cadastrar</span>}
+                    </Button>
+
+                      <Snackbar open={this.state.show} autoHideDuration={6000} onClose={()=>{this.handleClose()}}>
+                        <Alert onClose={()=>{this.handleClose()}} severity="success">
+                                Horário cadastrado com sucesso
+                        </Alert>
+                     </Snackbar>
                      </form>
                  </div>
              </div>
@@ -120,3 +181,12 @@ class AtendimentoHemocentro extends Component {
 }
 
 export default AtendimentoHemocentro;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
+  }));
